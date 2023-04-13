@@ -8368,6 +8368,9 @@ h1, h2, h3, h4, h5,
       height: 650px;
       position: relative;
       z-index: 0; }
+      /* .carousel-img-bg1 {
+        background-image: url(../pet_shop/static/publica/images/bg_1.jpg)
+      } */
       @media (max-width: 1199.98px) {
         .owl-carousel.home-slider .slider-item {
           background-position: center center !important; } }
