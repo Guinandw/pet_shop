@@ -6,14 +6,14 @@ def inicio(request):
     lista_productos = [
         {
             'oferta':'30',
-            'nombre':'Diente de Marcos',
+            'nombre':'Naranja',
             'precio':'120',
             'descuento':'80',
-            'imagen': '"{% static "publica/images/product-1.jpg" %}"'
+            'imagen': 'publica/images/product-1.jpg'
         },
          {
             'oferta':'0',
-            'nombre':'Diente de Marcos',
+            'nombre':'Cebolla',
             'precio':'120',
             'descuento':'80',
             'imagen': '"{% static "publica/images/product-1.jpg" %}"'
