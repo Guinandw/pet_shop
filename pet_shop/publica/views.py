@@ -16,14 +16,14 @@ def productos(request):
             'nombre':'Naranja',
             'precio':'120',
             'descuento':'80',
-            'imagen': 'static/publica/images/product-1.jpg'
+            'imagen': 'product-1.jpg'
         },
          {
             'oferta':0,
             'nombre':'Mandarina',
             'precio':120,
             'descuento': None,
-            'imagen': "{% static 'publica/images/product-1.jpg %}"
+            'imagen': 'product-2.jpg'
         }
         ]
     
@@ -31,6 +31,10 @@ def productos(request):
                 'productos': lista_productos
     }
     return render(request, 'publica/productos.html', context)
+
+
+def blog(request):
+    return render(request, 'publica/blog.html')
 
 def blog_single(request):
     return render(request, 'publica/blog-single.html')

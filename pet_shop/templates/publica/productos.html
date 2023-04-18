@@ -7,12 +7,12 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-0 bread">	{{producto.0.nombre}} </h1>
+            <h1 class="mb-0 bread">	Productos </h1>
           </div>
         </div>
       </div>
     </div>
-{% comment %} FINAL BANNER {% endcomment %}
+{% comment %} <img class="campsite-image" src="{% static '/publica/pimg/' %}{{campsite.image}}" alt="{{ campsite.name }}">FINAL BANNER {% endcomment %}
 <section class="ftco-section">
     	<div class="container">
     		<div class="row justify-content-center">
@@ -32,7 +32,7 @@
 				{% for producto in productos %}
 				<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src={{producto.imagen}} alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/' %}{{producto.imagen}} alt="Colorlib Template">
     						{% if producto.oferta > 0 %}
 							<span class="status">{{producto.oferta}}%</span>
 							{% endif %}
@@ -65,7 +65,7 @@
 				{% endif %}
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-1.jpg" %}" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/product-1.jpg' %} alt="Colorlib Template">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
