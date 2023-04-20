@@ -38,4 +38,7 @@ def blog(request):
 
 def blog_single(request):
     return render(request, 'publica/blog-single.html')
+
+def contactanos(request):
+    return render(request, 'publica/contacto.html')
     
