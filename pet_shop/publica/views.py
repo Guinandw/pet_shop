@@ -41,4 +41,15 @@ def blog_single(request):
 
 def contactanos(request):
     return render(request, 'publica/contacto.html')
-    
+
+def carrito(request):
+    return render(request, 'publica/cart.html')
+
+def checkout(request):
+    return render(request, 'publica/checkout.html')
+
+def favoritos(request):
+    return render(request, 'publica/favoritos.html')
+
+def producto_simple(request):
+    return render(request, 'publica/product-single.html')

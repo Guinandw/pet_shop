@@ -8,4 +8,8 @@ urlpatterns = [
     path('blog_single/', views.blog_single, name='blog_single'),
     path('blog/', views.blog, name='blog'),
     path('contactanos/', views.contactanos, name='contactanos'),
+    path('carrito', views.carrito, name='carrito'),
+    path('checkout', views.checkout, name='checkout'),
+    path('favoritos', views.favoritos, name='favoritos'),
+    path('product_single', views.producto_simple, name='producto_simple')
 ]
