@@ -8,6 +8,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
+        <link rel="icon" href="../static/publica/images/logo MP2 (1).ico">
+
         <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -26,7 +28,8 @@
         <link rel="stylesheet" href='{% static "publica/css/bootstrap-datepicker.css" %}'>
         <link rel="stylesheet" href='{% static "publica/css/jquery.timepicker.css" %}'>
 
-        
+        <script src="https://kit.fontawesome.com/79948dc6fe.js" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href='{% static "publica/css/flaticon.css" %}'>
         <link rel="stylesheet" href='{% static "publica/css/icomoon.css" %}'>
         <link rel="stylesheet" href='{% static "publica/css/style.css" %}?v={% now "U" %}'>
@@ -42,14 +45,14 @@
                     <div class="row d-flex">
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-                            <span class="text">+ 1235 2355 98</span>
+                            <span class="text">+54 11 2444 5321</span>
                         </div>
                         <div class="col-md pr-4 d-flex topper align-items-center">
                             <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                            <span class="text">youremail@email.com</span>
+                            <span class="text">mascotaspueyrredon@gmail.com</span>
                         </div>
                         <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-                            <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+                            <span class="text"><i class="fa-solid fa-user fa-lg" style="color: #ffffff;"></i>  Mi cuenta</span>
                         </div>
                     </div>
                 </div>
@@ -60,7 +63,10 @@
     <!-- nav -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-        <a class="navbar-brand" href="{% url 'inicio' %}">Mascota Pueyrredon</a>
+        <a class="navbar-brand logo" href="{% url 'inicio' %}">
+        <img class="logo_img" src="../static/publica/images/logo_MP2-removebg-150.png" alt="logo"> 
+        <span class="logo_nombre"><p class="logo_nombre_1">Mascotas</p><p class="logo_nombre_2">Pueyrredon</p></span>   
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
         </button>
@@ -68,18 +74,9 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item active"><a href="{% url 'inicio' %}" class="nav-link">Inico</a></li>
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="{% url 'productos' %}">Productos</a>
-                <a class="dropdown-item" href="wishlist.html">Wishlist</a>
-                <a class="dropdown-item" href="product-single.html">Single Product</a>
-                <a class="dropdown-item" href="cart.html">Cart</a>
-                <a class="dropdown-item" href="checkout.html">Checkout</a>
-            </div>
-            </li>
             <li class="nav-item"><a href="{% url 'nosotros' %}" class="nav-link">Nosotros</a></li>
-            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="{% url 'productos' %}" class="nav-link">Productos</a></li>    
+            <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Novedades</a></li>
             <li class="nav-item"><a href="{% url 'contactanos' %}" class="nav-link">Contactanos</a></li>
             <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
