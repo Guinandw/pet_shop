@@ -3,11 +3,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 def inicio(request):
+    titulo = 'Mascota Pueyrredon'
+    contexto = { 'titulo' : titulo}
    
-    return render(request, 'publica/index.html')
+    return render(request, 'publica/index.html', contexto)
 
 def nosotros(request):
-    return render(request, 'publica/about.html')
+    titulo = 'Nosotros'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/about.html', contexto)
 
 def productos(request):
     lista_productos = [
@@ -26,30 +30,43 @@ def productos(request):
             'imagen': 'product-2.jpg'
         }
         ]
-    
-    context = {
-                'productos': lista_productos
-    }
-    return render(request, 'publica/productos.html', context)
+    titulo = 'Productos'
+    contexto = { 'titulo' : titulo, 'productos': lista_productos}
+        
+    return render(request, 'publica/productos.html', contexto)
 
 
 def blog(request):
-    return render(request, 'publica/blog.html')
+    titulo = 'Blog de Novedades'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/blog.html', contexto)
 
 def blog_single(request):
-    return render(request, 'publica/blog-single.html')
+    titulo = 'Blog de Novedades'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/blog-single.html', contexto)
 
 def contactanos(request):
-    return render(request, 'publica/contacto.html')
+    titulo = 'Contactanos'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/contacto.html', contexto)
 
 def carrito(request):
-    return render(request, 'publica/cart.html')
+    titulo = 'Carrito de Compras'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/cart.html', contexto)
 
 def checkout(request):
-    return render(request, 'publica/checkout.html')
+    titulo = 'Chequeo de Compra'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/checkout.html', contexto)
 
 def favoritos(request):
-    return render(request, 'publica/favoritos.html')
+    titulo = 'Favoritos'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/favoritos.html', contexto)
 
 def producto_simple(request):
-    return render(request, 'publica/product-single.html')
+    titulo = 'Producto'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/product-single.html', contexto)
