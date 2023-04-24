@@ -16,6 +16,7 @@ def nosotros(request):
 def productos(request):
     lista_productos = [
         {
+            'categoria': 'frutas',
             'oferta':30,
             'nombre':'Naranja',
             'precio':'120',
@@ -23,6 +24,7 @@ def productos(request):
             'imagen': 'product-1.jpg'
         },
          {
+             'categoria': 'frutas',
             'oferta':0,
             'nombre':'Mandarina',
             'precio':120,

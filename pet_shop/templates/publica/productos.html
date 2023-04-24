@@ -5,16 +5,16 @@
 {% comment %} banner {% endcomment %}
 {% include './banner.html' %}
 
-<section class="ftco-section">
+<section class="ftco-section" id='productos'>
     	<div class="container">
     		<div class="row justify-content-center">
     			<div class="col-md-10 mb-5 text-center">
     				<ul class="product-category">
-    					<li><a href="#" class="active">Todo</a></li>
-    					<li><a href="#">Vegetales</a></li>
-    					<li><a href="#">Frutas</a></li>
-    					<li><a href="#">Jugos</a></li>
-    					<li><a href="#">Secos</a></li>
+    					<li class="product-list-item " data-filter='todo'><a href="#productos" class=" producto-activo active">Todo</a></li>
+    					<li class="product-list-item" data-filter='vegetales'><a href="#productos" class='producto-activo'>Vegetales</a></li>
+    					<li class="product-list-item" data-filter='frutas'><a href="#productos" class='producto-activo'>Frutas</a></li>
+    					<li class="product-list-item" data-filter='jugos'><a href="#productos" class='producto-activo'>Jugos</a></li>
+    					<li class="product-list-item" data-filter='secos'><a href="#productos" class='producto-activo'>Secos</a></li>
     				</ul>
     			</div>
     		</div>
@@ -22,7 +22,7 @@
 				{% if productos|length > 0 %}
 			
 				{% for producto in productos %}
-				<div class="col-md-6 col-lg-3 ftco-animate">
+				<div class="col-md-6 col-lg-3 ftco-animate filter {{producto.categoria}}">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/' %}{{producto.imagen}} alt="Colorlib Template">
     						{% if producto.oferta > 0 %}
@@ -55,7 +55,7 @@
     			</div>
 				{% endfor %}
 				{% endif %}
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/product-1.jpg' %} alt="Colorlib Template">
     						<span class="status">30%</span>
@@ -84,7 +84,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter frutas">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-2.jpg" %}" alt="Colorlib Template">
     						<span class="status">90%</span>
@@ -113,7 +113,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter secos">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-3.jpg" %}" alt="Colorlib Template">
 	    					<div class="overlay"></div>
@@ -141,7 +141,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-4.jpg" %}" alt="Colorlib Template">
     						<div class="overlay"></div>
@@ -171,7 +171,7 @@
     			</div>
 
 
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-5.jpg" %}" alt="Colorlib Template">
     						<span class="status">30%</span>
@@ -200,7 +200,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-6.jpg" %}" alt="Colorlib Template">
     						<div class="overlay"></div>
@@ -228,7 +228,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-7.jpg" %}" alt="Colorlib Template">
 	    					<div class="overlay"></div>
@@ -256,7 +256,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter jugos">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-8.jpg" %}" alt="Colorlib Template">
     						<div class="overlay"></div>
@@ -285,7 +285,7 @@
     				</div>
     			</div>
 
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-9.jpg" %}" alt="Colorlib Template">
     						<span class="status">30%</span>
@@ -314,7 +314,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter frutas">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-10.jpg" %}" alt="Colorlib Template">
     						<div class="overlay"></div>
@@ -342,7 +342,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-11.jpg" %}" alt="Colorlib Template">
 	    					<div class="overlay"></div>
@@ -370,7 +370,7 @@
     					</div>
     				</div>
     			</div>
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3 ftco-animate filter secos">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src="{% static "publica/images/product-12.jpg" %}" alt="Colorlib Template">
     						<div class="overlay"></div>
@@ -422,3 +422,7 @@
     
     
 {% endblock contenido %}
+
+{% block js %}
+<script src='{% static "publica/js/scripts.js" %}'></script>
+{% endblock js %}
