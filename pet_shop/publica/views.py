@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from publica.forms import ContactanosForms
+from django.contrib import messages
+
 # Create your views here.
 def inicio(request):
     titulo = 'Mascota Pueyrredon'
@@ -50,7 +53,22 @@ def blog_single(request):
 
 def contactanos(request):
     titulo = 'Contactanos'
-    contexto = { 'titulo' : titulo}
+    if(request.method=='POST'):
+        contacto_form = ContactanosForms(request.POST)
+        
+        if(contacto_form.is_valid()):
+            messages.success('Hemos recibido tus datos')
+        else:  
+            messages.warning(request, 'Por favor verificar los datos')
+    else:
+        contacto_form= ContactanosForms()
+            
+    
+    
+    contexto = { 
+                'titulo' : titulo,
+                'contacto_form': contacto_form
+                }
     return render(request, 'publica/contacto.html', contexto)
 
 def carrito(request):

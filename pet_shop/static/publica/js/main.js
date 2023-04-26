@@ -216,6 +216,8 @@
 						var el = $(this);
 						setTimeout( function () {
 							var effect = el.data('animate-effect');
+
+							
 							if ( effect === 'fadeIn') {
 								el.addClass('fadeIn ftco-animated');
 							} else if ( effect === 'fadeInLeft') {
@@ -229,7 +231,7 @@
 						},  k * 50, 'easeInOutExpo' );
 					});
 					
-				}, 100);
+				}, 0);
 				
 			}
 
