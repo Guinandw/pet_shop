@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
 
 # Create your views here.
 def inicio(request):
@@ -9,6 +12,8 @@ def inicio(request):
 def nosotros(request):
     return render(request, 'publica/about.html')
 
+
+@login_required
 def productos(request):
     lista_productos = [
         {
@@ -31,6 +36,11 @@ def productos(request):
                 'productos': lista_productos
     }
     return render(request, 'publica/productos.html', context)
+
+
+def exit(request):
+    logout(request)
+    return redirect('inicio')
 
 
 def blog(request):
