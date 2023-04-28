@@ -42,9 +42,13 @@
                 {{campo}}
               </div>
               <div>
+                {{campo.success}}
                 {{campo.errors}}
               </div>
               {% endfor %}
+              <div class="form-group">
+                <input type="submit" value="Enviar" class="btn btn-primary py-3 px-5">
+              </div>
               {% comment %} <div class="form-group">
                 <input type="text" class="form-control" placeholder="Your Name">
               </div>

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from publica.forms import ContactanosForms
+from publica.forms import EnviosForms
 from django.contrib import messages
 
 # Create your views here.
@@ -78,7 +79,18 @@ def carrito(request):
 
 def checkout(request):
     titulo = 'Chequeo de Compra'
-    contexto = { 'titulo' : titulo}
+    if(request.method=='POST'):
+        envio = EnviosForms(request.POST)
+        
+        if envio.is_valid():
+            messages.success('Hemos recibido tu solicitud.')
+        else:
+            messages.warning(request, 'Por favor verificar los datos')
+    
+    else:
+        envio = EnviosForms()
+    
+    contexto = { 'titulo' : titulo, 'enviosForm':envio}
     return render(request, 'publica/checkout.html', contexto)
 
 def favoritos(request):
