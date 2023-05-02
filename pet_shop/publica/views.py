@@ -3,11 +3,12 @@ from django.http import HttpResponse
 
 from publica.forms import ContactanosForms
 from publica.forms import EnviosForms
+from publica.forms import AltasForms
 from django.contrib import messages
 
 # Create your views here.
 def inicio(request):
-    titulo = 'Mascota Pueyrredon'
+    titulo = 'Pet Shop'
     contexto = { 'titulo' : titulo}
    
     return render(request, 'publica/index.html', contexto)
@@ -83,6 +84,7 @@ def checkout(request):
         envio = EnviosForms(request.POST)
         
         if envio.is_valid():
+            print('DATOS DESPUES DEL IS VALID'+envio)
             messages.success('Hemos recibido tu solicitud.')
         else:
             messages.warning(request, 'Por favor verificar los datos')
@@ -102,3 +104,17 @@ def producto_simple(request):
     titulo = 'Producto'
     contexto = { 'titulo' : titulo}
     return render(request, 'publica/product-single.html', contexto)
+
+def registro(request):
+    titulo = "Registrarse"
+    if(request.method=='POST'):
+        alta = AltasForms(request.POST)
+        print(alta)
+        if alta.is_valid():
+            messages.success(request, "Hemos recibido sus datos")
+        else:
+            messages.warning(request, "Por favor, ingrese todos los datos correctamente.")
+    else:
+        alta = AltasForms()
+    contexto = { 'titulo' : titulo, 'alta':alta}
+    return render(request, 'publica/registro.html', contexto)

@@ -57,7 +57,10 @@
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+									<div class="quantity-right-plus">+</div>
+					             	<input name="quantity" class="quantity form-control input-number" value="1" min="1" max="100" type='number'>
+									<div class="quantity-left-minus">-</div>
+
 					          	</div>
 					          </td>
 						        
@@ -150,3 +153,43 @@
     </section>
 
 	{% endblock contenido %}
+
+		{% block js %}
+	<script>
+		$(document).ready(function(){
+
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+		        
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		            
+		            $('#quantity').val(quantity + 1);
+
+		          
+		            // Increment
+		        
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		      
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+		    
+		});
+	</script>
+	
+	{% endblock js %}

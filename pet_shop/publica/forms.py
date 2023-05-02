@@ -3,18 +3,21 @@ from django.forms import ValidationError
 import re
 
 def validador_nombres(value):
+    print('VALIDADOR NOMBRE')
     for i in value:
-        if i.isdigit():
-            raise ValidationError(f'{value} no es un nombre valido', code='Invalid')
+        if (i.isdigit()):
+            raise ValidationError(f'{value} no es un nombre valido', code='Invalid', params={'valor':value})
     
         
 def validador_numeros(value):
-    
-        if value.isdecimal():
+    print('VALIDADOR NUMERO')
+    if (value.isdecimal()):
+            print(f'{value} es decimal')
             return
-        else: raise ValidationError(f'No ingrese ni letras ni signos.', code='Invalid')
+    else: raise ValidationError(f'No ingrese ni letras ni signos.', code='Invalid', params={'valor':value})
         
 def validador_email(value):
+    print('VALIDADOR EMAIL')
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if not re.match(email_regex, value):
         raise ValidationError('Correo electrónico inválido')
@@ -25,6 +28,7 @@ class ContactanosForms(forms.Form):
     nombre = forms.CharField(
         label='Nombre',
         max_length=50,
+        validators=(validador_nombres,),
         widget=forms.TextInput(
             attrs={
                 'class':'form-control', 
@@ -35,6 +39,7 @@ class ContactanosForms(forms.Form):
     email = forms.EmailField(
         label='Email',
         max_length=100,
+        validators=(validador_email,),
         error_messages={
             'required': 'Por favor ingresar email'
         },
@@ -87,21 +92,6 @@ class EnviosForms(forms.Form):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
     )
     
-    """ dni = forms.CharField(
-        label='DNI',
-        max_length=11,
-        validators=(validador_numeros,),
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'CUIT...'})
-    )
-    
-    cuit = forms.CharField(
-        label='CUIT',
-        max_length=11,
-        validators=(validador_numeros,),
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'CUIT...'})
-    ) """
-    
-    
     direccion = forms.CharField(
         label='Direccion de Envio',
         max_length=200,
@@ -123,8 +113,12 @@ class EnviosForms(forms.Form):
     
     telefono = forms.IntegerField(
         label='Telefono',
+        max_value=15,
         validators=(validador_numeros, ),
-        widget=forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Solo Numeros...'})
+        error_messages={
+            'required':'Ha ingresado un telefono invalido'
+        },
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Solo Numeros...'})
     )
     
     email = forms.EmailField(
@@ -136,3 +130,21 @@ class EnviosForms(forms.Form):
         },
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'email', 'type': 'email'})
     )
+    
+class AltasForms(EnviosForms):
+    
+       
+    dni = forms.CharField(
+        label='DNI',
+        max_length=11,
+        validators=(validador_numeros,),
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'CUIT...'})
+    )
+    
+    cuit = forms.CharField(
+        label='CUIT',
+        max_length=11,
+        validators=(validador_numeros,),
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'CUIT...'})
+    )
+    
