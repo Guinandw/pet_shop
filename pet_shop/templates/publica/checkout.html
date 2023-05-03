@@ -15,7 +15,7 @@
 			</div>
 		{% endfor %}
 			
-				<form action="#" class="billing-form" method='POST' name='checkout'>
+				<form action="{% url 'checkout' %}" class="billing-form" method='POST' name='checkout'>
 					{% csrf_token %}
 					<h3 class="mb-4 billing-heading">Datos de Envíos</h3>
 					<div class="row align-items-end">
@@ -56,6 +56,7 @@
 								<div class="form-group">
 									<label for="">{{enviosForm.direccion.label}}</label>
 									{{enviosForm.direccion}}
+									{{enviosForm.direccion.errors}}
 								</div>
 							</div>
 
@@ -69,6 +70,7 @@
 								<div class="form-group">
 								<label for="">{{enviosForm.ciudad.label}}</label>
 									{{enviosForm.ciudad}}
+									{{enviosForm.ciudad.errors}}
 								</div>
 							</div>
 
@@ -76,6 +78,7 @@
 								<div class="form-group">
 									<label for="">{{enviosForm.cp.label}}</label>
 									{{enviosForm.cp}}
+									{{enviosForm.cp.errors}}
 								</div>
 							</div>
 							
@@ -83,6 +86,7 @@
 								<div class="form-group">
 									<label for="">{{enviosForm.telefono.label}}</label>
 									{{enviosForm.telefono}}
+									{{enviosForm.telefono.errors}}
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -90,6 +94,7 @@
 							<div class="form-group">
 								<label for="">{{enviosForm.email.label}}</label>
 								{{enviosForm.email}}
+								{{enviosForm.email.errors}}
 							</div>
 						</div>
 						<div class="w-100"></div>

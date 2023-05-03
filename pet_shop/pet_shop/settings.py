@@ -94,7 +94,7 @@ DATABASES = {
         'PORT': env("DATABASE_PORT"),
     }
 }
-}
+
 
 
 # Password validation

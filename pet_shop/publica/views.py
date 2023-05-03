@@ -22,7 +22,7 @@ def nosotros(request):
     return render(request, 'publica/about.html', contexto)
 
 
-@login_required
+#@login_required
 def productos(request):
     lista_productos = [
         {
@@ -94,8 +94,8 @@ def checkout(request):
         envio = EnviosForms(request.POST)
         
         if envio.is_valid():
-            print('DATOS DESPUES DEL IS VALID'+envio)
-            messages.success('Hemos recibido tu solicitud.')
+           
+            messages.success(request,'Hemos recibido tu solicitud.')
         else:
             messages.warning(request, 'Por favor verificar los datos')
     
@@ -119,7 +119,8 @@ def registro(request):
     titulo = "Registrarse"
     if(request.method=='POST'):
         alta = AltasForms(request.POST)
-        print(alta)
+        for i in alta:
+            print(i)
         if alta.is_valid():
             messages.success(request, "Hemos recibido sus datos")
         else:

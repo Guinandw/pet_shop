@@ -10,38 +10,25 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-xl-7 ftco-animate">
-          {% csrf_token %}
-              <form action="#" class="billing-form">
+            {% for message in messages %}
+			<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				{{message}}
+			</div>
+		{% endfor %}
+              <form action="{% url 'registro' %}" class="billing-form" method='POST' name='registro'>
+                {% csrf_token %}
                   <h3 class="mb-4 billing-heading">Ingrese sus datos</h3>
                       <div class="row align-items-end">
+                        {% for campo in alta %}
                           <div class="col-md-6">
                           <div class="form-group">
-                          <label for="firstname">{{alta.nombre.label}}</label>
-                          {{alta.nombre}}
-
+                            <label for="{{firstname}}">{{campo.label}}</label>
+                            {{campo}}
+                            {{campo.errors}}
                       </div>
                       </div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="lastname">{{alta.apellido.label}}</label>
-                              {{alta.apellido}}	
-                          </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="firstname">{{alta.dni.label}}</label>
-                            {{alta.dni}}
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="lastname">{{alta.cuit.label}}</label>
-                            {{alta.cuit}}	
-                        </div>
-                    </div>
-                      
+                      {% endfor %}
+                     
                       {% comment %} <div class="w-100">
                           <div class="col-md-12">
                               <div class="form-group">
@@ -60,46 +47,9 @@
                               </div>
                           </div>
                       </div> {% endcomment %}
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="">{{alta.direccion.label}}</label>
-                                  {{alta.direccion}}
-                              </div>
-                          </div>
+                     
 
-                          {% comment %}  <div class="col-md-6">
-                              <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Appartment, suite, unit etc: (optional)">
-                              </div> 
-                          </div> {% endcomment %}
-
-                          <div class="col-md-6">
-                              <div class="form-group">
-                              <label for="">{{alta.ciudad.label}}</label>
-                                  {{alta.ciudad}}
-                              </div>
-                          </div>
-
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="">{{alta.cp.label}}</label>
-                                  {{alta.cp}}
-                              </div>
-                          </div>
                           
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="">{{alta.telefono.label}}</label>
-                                  {{alta.telefono}}
-                              </div>
-                          </div>
-                          <div class="w-100"></div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="">{{alta.email.label}}</label>
-                              {{alta.email}}
-                          </div>
-                      </div>
                       <div class="w-100"></div>
                       {% comment %} <div class="col-md-12">
                           <div class="form-group mt-4">
