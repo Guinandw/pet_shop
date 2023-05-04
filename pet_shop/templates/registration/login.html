@@ -3,15 +3,17 @@
 {% block css %}{% endblock css %}
 
 {% block contenido %}
-<h3>LOGIN</h3>
-<br>
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="text" name="username" id="" placeholder="Nombre de Usuario">
+<div class="container">
+    <h3>LOGIN</h3>
     <br>
-    <input type="password" name="password" id="" placeholder="Contraseña">
-    <br>
-    <button type="submit">Iniciar Sesión</button>
-
-</form>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" id="" placeholder="Nombre de Usuario">
+        <br>
+        <input type="password" name="password" id="" placeholder="Contraseña">
+        <br>
+        <button type="submit">Iniciar Sesión</button>
+    
+    </form>
+</div>
 {% endblock contenido %}

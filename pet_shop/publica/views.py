@@ -105,27 +105,10 @@ def checkout(request):
     contexto = { 'titulo' : titulo, 'enviosForm':envio}
     return render(request, 'publica/checkout.html', contexto)
 
-def favoritos(request):
-    titulo = 'Favoritos'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'publica/favoritos.html', contexto)
+
 
 def producto_simple(request):
     titulo = 'Producto'
     contexto = { 'titulo' : titulo}
     return render(request, 'publica/product-single.html', contexto)
 
-def registro(request):
-    titulo = "Registrarse"
-    if(request.method=='POST'):
-        alta = AltasForms(request.POST)
-        for i in alta:
-            print(i)
-        if alta.is_valid():
-            messages.success(request, "Hemos recibido sus datos")
-        else:
-            messages.warning(request, "Por favor, ingrese todos los datos correctamente.")
-    else:
-        alta = AltasForms()
-    contexto = { 'titulo' : titulo, 'alta':alta}
-    return render(request, 'publica/registro.html', contexto)
