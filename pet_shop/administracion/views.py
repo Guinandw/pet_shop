@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def login(request):
-    return HttpResponse('<h1>VENTANA DE LOGEO</H1>')
+    return HttpResponse(request,'administracion/login.html')

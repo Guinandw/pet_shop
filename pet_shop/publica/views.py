@@ -106,7 +106,6 @@ def checkout(request):
     return render(request, 'publica/checkout.html', contexto)
 
 
-
 def producto_simple(request):
     titulo = 'Producto'
     contexto = { 'titulo' : titulo}
