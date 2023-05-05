@@ -53,15 +53,6 @@ def exit(request):
     return redirect('inicio')
 
 
-def blog(request):
-    titulo = 'Blog de Novedades'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'publica/blog.html', contexto)
-
-def blog_single(request):
-    titulo = 'Blog de Novedades'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'publica/blog-single.html', contexto)
 
 def contactanos(request):
     titulo = 'Contactanos'
@@ -83,27 +74,6 @@ def contactanos(request):
                 }
     return render(request, 'publica/contacto.html', contexto)
 
-def carrito(request):
-    titulo = 'Carrito de Compras'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'publica/cart.html', contexto)
-
-def checkout(request):
-    titulo = 'Chequeo de Compra'
-    if(request.method=='POST'):
-        envio = EnviosForms(request.POST)
-        
-        if envio.is_valid():
-           
-            messages.success(request,'Hemos recibido tu solicitud.')
-        else:
-            messages.warning(request, 'Por favor verificar los datos')
-    
-    else:
-        envio = EnviosForms()
-    
-    contexto = { 'titulo' : titulo, 'enviosForm':envio}
-    return render(request, 'publica/checkout.html', contexto)
 
 
 def producto_simple(request):
