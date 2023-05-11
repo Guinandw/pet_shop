@@ -22,7 +22,7 @@ def nosotros(request):
     return render(request, 'publica/about.html', contexto)
 
 
-#@login_required
+
 def productos(request):
     lista_productos = [
         {
@@ -48,9 +48,7 @@ def productos(request):
     return render(request, 'publica/productos.html', contexto)
 
 
-def exit(request):
-    logout(request)
-    return redirect('inicio')
+
 
 
 
