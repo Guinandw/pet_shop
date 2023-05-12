@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ValidationError
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 import re
 
 def validador_nombres(value):
@@ -26,29 +26,65 @@ def validador_email(value):
     return value
 
 
-class PersonaForms(forms.Form):
+
+class userFormCompleto(UserCreationForm):
     
-    usuario = forms.CharField(
-        label='Usuario',
+    username = forms.CharField(
+        label='Nombre de Usuario',
         required=True,
-        max_length=50,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Usuario...'})
+        max_length=100,
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Alias...'})
     )
     
-    nombre = forms.CharField(
+    password1 = forms.CharField(
+        label='Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    password2 = forms.CharField(
+        label='Confirmar Password',
+        required=True,
+        max_length=100,
+        min_length=8,
+        widget=forms.TextInput(attrs={'class':'form-control', 'type':'password'})
+    )
+    
+    email = forms.EmailField(
+        max_length=200, 
+        label='Correo',
+        error_messages={ 
+                        "required":'Correo Invalido'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo', 'type':'email'})
+        )
+    
+    
+    first_name = forms.CharField(
         label='Nombre',
         required=True,
-        max_length=50,
+        max_length=100,
         validators=(validador_nombres,),
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
     )
     
-    apellido = forms.CharField(
+    last_name = forms.CharField(
         label='Apellido',
-        max_length=11,
+        max_length=100,
         validators=(validador_nombres,),
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
     )
+    
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+
+
+
+class Perfil(forms.Form):
+    
     
     dni = forms.CharField(
         label='DNI',
@@ -105,16 +141,6 @@ class PersonaForms(forms.Form):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Solo Numeros...', 'type':'number'})
     )
     
-    email = forms.EmailField(
-        label='Correo Electronico',
-        max_length=100,
-        required=True,
-        validators=(validador_email,),
-        error_messages={
-            'required': 'Se debe completar el Corrreo Electronico.'
-        },
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'email', 'type': 'email'})
-    )
     
     def clean_mensaje(self):
         usuario = self.cleaned_data['usuario']
@@ -123,7 +149,7 @@ class PersonaForms(forms.Form):
         return usuario
     
     
-class AltasForms(EnviosForms):
+
     
        
     

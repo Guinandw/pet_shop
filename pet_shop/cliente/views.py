@@ -12,7 +12,7 @@ def favoritos(request):
     contexto = { 'titulo' : titulo}
     return render(request, 'cliente/favoritos.html', contexto)
 
-def registro(request):
+""" def registro(request):
     titulo = "Registrarse"
     if(request.method=='POST'):
         alta = AltasForms(request.POST)
@@ -25,7 +25,7 @@ def registro(request):
     else:
         alta = AltasForms()
     contexto = { 'titulo' : titulo, 'alta':alta}
-    return render(request, 'cliente/registro.html', contexto)
+    return render(request, 'cliente/registro.html', contexto) """
 
 def pedidos_pendientes(request):
     return render(request, 'cliente/pedidos_pendientes.html')
