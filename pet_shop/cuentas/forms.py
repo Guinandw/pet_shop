@@ -25,3 +25,106 @@ def validador_email(value):
         raise ValidationError('Correo electrónico inválido')
     return value
 
+
+class PersonaForms(forms.Form):
+    
+    usuario = forms.CharField(
+        label='Usuario',
+        required=True,
+        max_length=50,
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Usuario...'})
+    )
+    
+    nombre = forms.CharField(
+        label='Nombre',
+        required=True,
+        max_length=50,
+        validators=(validador_nombres,),
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
+    )
+    
+    apellido = forms.CharField(
+        label='Apellido',
+        max_length=11,
+        validators=(validador_nombres,),
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
+    )
+    
+    dni = forms.CharField(
+        label='DNI',
+        max_length=11,
+        validators=(validador_numeros,),
+        required=False,
+        error_messages={
+            'required':'Ha ingresado un DNI invalido'
+        },
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'DNI...', 'type':'number'})
+    )
+    
+    cuit = forms.CharField(
+        label='CUIT',
+        max_length=11,
+        validators=(validador_numeros,),
+        required=False,
+        error_messages={
+            'required':'Ha ingresado un CUIT invalido'
+        },
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'CUIT...', 'type':'number'})
+    )
+    
+    direccion = forms.CharField(
+        label='Direccion de Envio',
+        required=True,
+        max_length=200,
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Direccion...'})
+    )
+    
+        
+    ciudad = forms.CharField(
+        label='Ciudad',
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ciudad...'})
+    ) 
+    
+    cp = forms.CharField(
+        label='Codigo Postal',
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'direccion...'})
+    )
+    
+    telefono = forms.CharField(
+        label='Telefono',
+        max_length=15,
+        required=True,
+        validators=(validador_numeros, ),
+        error_messages={
+            'required':'Ha ingresado un telefono invalido'
+        },
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Solo Numeros...', 'type':'number'})
+    )
+    
+    email = forms.EmailField(
+        label='Correo Electronico',
+        max_length=100,
+        required=True,
+        validators=(validador_email,),
+        error_messages={
+            'required': 'Se debe completar el Corrreo Electronico.'
+        },
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'email', 'type': 'email'})
+    )
+    
+    def clean_mensaje(self):
+        usuario = self.cleaned_data['usuario']
+        if len(usuario) < 6:
+            raise ValidationError('Debe tener 6 digitos o mas.')
+        return usuario
+    
+    
+class AltasForms(EnviosForms):
+    
+       
+    
+    
