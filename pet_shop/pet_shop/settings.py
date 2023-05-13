@@ -154,6 +154,7 @@ STATIC_ROOT = BASE_DIR / 'static_root'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+LOGIN_URL='login'
 #VARIABLES DE REDIRECCION DE LOGIN Y LOGOUT
 LOGIN_REDIRECT_URL ='inicio'
 LOGOUT_REDIRECT_URL = 'inicio'

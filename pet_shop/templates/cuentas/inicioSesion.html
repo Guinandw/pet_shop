@@ -1,0 +1,38 @@
+{% extends './base.html' %}
+{% load static %}
+{% block css %}{% endblock css %}
+{% block contenido %}
+{% comment %} banner {% endcomment %}
+{% include './banner.html' %}
+
+
+<section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 ftco-animate">
+            {% for message in messages %}
+			<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				{{message}}
+			</div>
+		    {% endfor %}
+              <form action="{% url 'login' %}" class="billing-form" method='POST' name='login'>
+                {% csrf_token %}
+                  <h3 class="mb-4 billing-heading">Inicio de Sesión</h3>
+                      <div class="row align-items-end">
+                        {% for campo in form %}
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            {{campo.label}}
+                            {{campo}}
+                            {{campo.errors}}
+                      </div>
+                      </div>
+                      {% endfor %}
+                      <div class="w-100"></div>
+                      <div class="w-100">
+                          <button type="submit" class='btn btn-primary py-3 px-4 w-100'  >REGISTRARSE</button>
+                      </div>
+              </div>
+          </form>
+<br><br>
+{% endblock contenido %}
