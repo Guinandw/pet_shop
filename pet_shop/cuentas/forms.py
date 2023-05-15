@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ValidationError
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 import re
 
@@ -27,7 +27,10 @@ def validador_email(value):
 
 
 
-class userFormCompleto(UserCreationForm):
+
+
+
+class userFormCompleto(forms.Form):
     
     username = forms.CharField(
         label='Nombre de Usuario',
@@ -55,6 +58,7 @@ class userFormCompleto(UserCreationForm):
     email = forms.EmailField(
         max_length=200, 
         label='Correo',
+        validators=(validador_email,),
         error_messages={ 
                         "required":'Correo Invalido'},
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo', 'type':'email'})
@@ -65,6 +69,7 @@ class userFormCompleto(UserCreationForm):
         required=True,
         max_length=100,
         validators=(validador_nombres,),
+        error_messages={'required':'probando'},
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
     )
     
@@ -72,12 +77,14 @@ class userFormCompleto(UserCreationForm):
         label='Apellido',
         max_length=100,
         validators=(validador_nombres,),
+        error_messages={'required':'probando'},
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
     )
     
-    class Meta:
+    
+    """ class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2') """
 
 
 

@@ -20,13 +20,13 @@
                   <p class="w100">{{user.first_name}}</p>
                   <p class="w100">{{user.last_name}}</p>
                   <p class="w100">{{user.email}}</p>
-                  <form action="" method="post">
+                  <form action="{% url 'editarUsuario' %}" method="post">
                     <button class='btn btn-primary' type="submit">Editar</button>
                   </form>
                   <h3 class="mt-4 mb-4 billing-heading">Informacion Adicional</h3>
                   {% if adicional == 'No ha agregado informacion adicional' %}
                     <p class="mb-3">{{adicional}}</p>
-                    <form action="" method="post">
+                    <form action="{% url 'editarPerfil' %}" method="post">
                       <button class='btn btn-primary' type="submit">AGREGAR</button>
                     </form>
                   {% else %}

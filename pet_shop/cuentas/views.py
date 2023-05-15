@@ -22,17 +22,26 @@ def crearCuenta(request):
         password1 = request.POST['password1']  
         password2 = request.POST['password2']
         
-        if password1 == password2:
-            try:
-                user = User.objects.create(username = usuario, first_name = nombre,
-                                           last_name = apellido, email = email
-                                           )
-                user.set_password(password1)
-                user.save()
-                login(request, user)
-                return redirect('inicio')
-            except IntegrityError:
-                return render(request, 'cuentas/crearCuenta.html', {'form':userFormCompleto} )
+        userForm = userFormCompleto(request.POST)
+        if userForm.is_valid():
+            if password1 == password2:
+                try:
+                    user = User.objects.create(username = usuario, first_name = nombre,
+                                            last_name = apellido, email = email
+                                            )
+                    user.set_password(password1)
+                    user.save()
+                    login(request, user)
+                    return redirect('perfil')
+                except IntegrityError:
+                    messages.warning(request, 'Cuenta Existente')
+                    return render(request, 'cuentas/crearCuenta.html', {'form':userFormCompleto(), 'errors':'Cuenta Existente'} )
+            else:
+                messages.warning(request, 'Confirmar Password')
+                return render(request, 'cuentas/crearCuenta.html', {'form':userFormCompleto(), 'errors':'Confirmar Password.'} )
+        else:
+            messages.warning(request, 'Por Favor verificar los datos')
+            return render(request, 'cuentas/crearCuenta.html', {'form':userFormCompleto()})
 
 
 @login_required          
@@ -63,6 +72,39 @@ def inicioSesion(request):
 
 @login_required
 def perfil(request):
+    usuario = User.objects.get(pk=request.user.id)
+    
+    try:
+        adicional = get_object_or_404(Perfil,user_id = request.user.id)
+       
+    except Http404:
+        adicional = 'No ha agregado informacion adicional'
+    print(adicional)
+    """ if adicional : 
+        pass
+    else:
+        adicional = 'No ha agregado informacion adicional' """
+    
+    print(usuario)
+    if request.method == 'GET':
+        #usuarioForm = userFormCompleto(instance= usuario)
+        return render(request, 
+                      'cuentas/perfil.html', 
+                      {'form':PerfilForm, 'user':usuario, 'adicional':adicional})
+
+@login_required
+def editarUsuario(request):
+    usuario = User.objects.get(pk=request.user.id)
+
+    if request.method == 'GET':
+        usuarioForm = userFormCompleto(instance= usuario)
+        #usuarioForm.fields['username'].widget.attrsx.update({'enable': False})
+        return render(request, 
+                      'cuentas/editarUsuario.html', 
+                      {'form':usuarioForm})
+
+@login_required
+def editarPerfil(request):
     usuario = User.objects.get(pk=request.user.id)
     
     try:

@@ -19,15 +19,17 @@
                 {% csrf_token %}
                   <h3 class="mb-4 billing-heading">Ingrese sus datos</h3>
                       <div class="row align-items-end">
-                        {% for campo in form %}
-                          <div class="col-md-6">
+                        
+                        <div class="col-md-12">{{form.as_p}}</div>
+                        {% comment %} {% for campo in form %}
+                          <div class="col-md-12">
                           <div class="form-group">
                             {{campo.label}}
                             {{campo}}
-                            {{campo.errors}}
+                            <p class="w-100">{{campo.errors}}</p>
                       </div>
                       </div>
-                      {% endfor %}
+                      {% endfor %} {% endcomment %}
                      
                       {% comment %} <div class="w-100">
                           <div class="col-md-12">
