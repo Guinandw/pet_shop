@@ -1,18 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout, login, authenticate
-from .forms import userFormCompleto 
+from .forms import userFormCompleto, PerfilForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Perfil
+from django.http import Http404
 
 # Create your views here.
-def login(request):
-    return render(request,'cuentas/login.html')
-    form = forms.userFormCompleto
-
-
-
 def crearCuenta(request):
     if request.method == 'GET':
         
@@ -27,36 +24,62 @@ def crearCuenta(request):
         
         if password1 == password2:
             try:
-                user = User.objects.create(username = usuario, password = password1, first_name = nombre,
+                user = User.objects.create(username = usuario, first_name = nombre,
                                            last_name = apellido, email = email
                                            )
+                user.set_password(password1)
                 user.save()
                 login(request, user)
                 return redirect('inicio')
             except IntegrityError:
-                return render(request, 'crearCuenta.html', {'form':userFormCompleto} )
+                return render(request, 'cuentas/crearCuenta.html', {'form':userFormCompleto} )
+
+
 @login_required          
 def salir(request):
     logout(request)
-    return render(request, 'inicio')
+    return render(request, 'publica/index.html')
     
 def inicioSesion(request):
     titulo = 'Inicio Sesion'
     if request.method == 'GET':
-        return render(request, 'inicioSesion.html', {'form':AuthenticationForm, 'titulo':titulo})
+        return render(request, 'cuentas/inicioSesion.html', {'form':AuthenticationForm, 'titulo':titulo})
     else:
         usuario = authenticate(request, 
                                    username=request.POST['username'], 
                                    password = request.POST['password']
                                    )
+        print(usuario)
         if usuario is None:
-            return render(request, 'inicioSesion.html', 
+            messages.warning(request, 'Usuario o password incorrecto')
+            return render(request, 'cuentas/inicioSesion.html', 
                           {'form':AuthenticationForm, 
                            'titulo':titulo, 
-                           'error':'Usuario o password incorrecto'})
+                           })
         else:
+            #messages.success(request, 'Bienvenido')
             login(request, usuario)
-            return render('inicio')
+            return render(request, 'publica/index.html')
 
-def perfil(request, user_id):
-      pass
+@login_required
+def perfil(request):
+    usuario = User.objects.get(pk=request.user.id)
+    
+    try:
+        adicional = get_object_or_404(Perfil,user_id = request.user.id)
+       
+    except Http404:
+        adicional = 'No ha agregado informacion adicional'
+    print(adicional)
+    """ if adicional : 
+        pass
+    else:
+        adicional = 'No ha agregado informacion adicional' """
+    
+    print(usuario)
+    if request.method == 'GET':
+        #usuarioForm = userFormCompleto(instance= usuario)
+        return render(request, 
+                      'cuentas/perfil.html', 
+                      {'form':PerfilForm, 'user':usuario, 'adicional':adicional})
+        

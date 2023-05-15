@@ -60,7 +60,6 @@ class userFormCompleto(UserCreationForm):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Correo', 'type':'email'})
         )
     
-    
     first_name = forms.CharField(
         label='Nombre',
         required=True,
@@ -83,14 +82,14 @@ class userFormCompleto(UserCreationForm):
 
 
 
-class Perfil(forms.Form):
+class PerfilForm(forms.Form):
     
     
     dni = forms.CharField(
         label='DNI',
         max_length=11,
         validators=(validador_numeros,),
-        required=False,
+        required=True,
         error_messages={
             'required':'Ha ingresado un DNI invalido'
         },
@@ -101,7 +100,7 @@ class Perfil(forms.Form):
         label='CUIT',
         max_length=11,
         validators=(validador_numeros,),
-        required=False,
+        required=True,
         error_messages={
             'required':'Ha ingresado un CUIT invalido'
         },

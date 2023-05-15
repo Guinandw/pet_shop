@@ -1,0 +1,64 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+{% block css %}{% endblock css %}
+
+{% if request.user.is_authenticated %}
+{% block contenido %}
+
+<section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 ftco-animate">
+            {% for message in messages %}
+			          <div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				          {{message}}
+			          </div>
+		        {% endfor %}
+            <h3 class="mb-4 billing-heading">Informacion Basica</h3>
+            <div class="align-items-end">
+                  <p class="w-100">{{user.username}}</p>
+                  <p class="w100">{{user.first_name}}</p>
+                  <p class="w100">{{user.last_name}}</p>
+                  <p class="w100">{{user.email}}</p>
+                  <form action="" method="post">
+                    <button class='btn btn-primary' type="submit">Editar</button>
+                  </form>
+                  <h3 class="mt-4 mb-4 billing-heading">Informacion Adicional</h3>
+                  {% if adicional == 'No ha agregado informacion adicional' %}
+                    <p class="mb-3">{{adicional}}</p>
+                    <form action="" method="post">
+                      <button class='btn btn-primary' type="submit">AGREGAR</button>
+                    </form>
+                  {% else %}
+                    <p class="w-100 mb-3">{{ adicional.dni}}</p>
+                    <p class="w-100 mb-3">{{ adicional.cuit}}</p>
+                    <p class="w-100 mb-3">{{ adicional.direccion}}</p>
+                    <p class="w-100 mb-3">{{ adicional.ciudad}}</p>
+                    <p class="w-100 mb-3">{{ adicional.cp}}</p>
+                    <p class="w-100 mb-3">{{ adicional.telefono}}</p>
+                    <form action="" method="post">
+                      <button class='btn btn-primary' type="submit">Editar</button>
+                    </form>
+                  {% endif %}
+              {% comment %} <form action="{% url 'perfil' %}" class="billing-form" method='POST' name='perfil'>
+                {% csrf_token %}
+                <h3 class="mb-4 billing-heading">Informacion Adicional</h3>
+                  <div class="row align-items-end">
+                        {% for campo in form %}
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <p class="w-100">{{campo.label}}</p>
+                              <p class="w100">{{campo}}</p>
+                              <p class="w100">{{campo.errors}}</p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      <div class="w-100"></div>
+                      <div class="w-100">
+                          <button type="submit" class='btn btn-primary py-3 px-4 w-100'  >Guardar</button>
+                      </div>
+                  </div>
+              </form> {% endcomment %}
+<br><br>
+{% endblock contenido %}
+{% endif %}
