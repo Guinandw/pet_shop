@@ -158,6 +158,23 @@ class PerfilForm(forms.ModelForm):
 
 class editarUsuario(forms.ModelForm):
     
+    first_name = forms.CharField(
+        label='Nombre',
+        required=True,
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre...'})
+    )
+    
+    last_name = forms.CharField(
+        label='Apellido',
+        max_length=100,
+        validators=(validador_nombres,),
+        error_messages={'required':'probando'},
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Apellido...'})
+    )
+    
     class Meta:
         model= User
         fields = ('first_name', 'last_name', 'email')

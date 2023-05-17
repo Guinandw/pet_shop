@@ -91,16 +91,16 @@ def editarUsuario(request):
     usuario = User.objects.get(pk=request.user.id)
 
     if request.method == 'GET':
-        usuarioForm = editarUsuario(instance= usuario)
+        usuarioForm = userFormCompleto(instance= usuario)
         return render(request, 
                       'cuentas/editarUsuario.html', 
                       {'form':usuarioForm})
     else:
-        usuarioForm = editarUsuario(instance=usuario)
-        usuarioForm.first_name = request.POST['first_name']
-        usuarioForm.last_name = request.POST['last_name']
+        
+        usuario.first_name = request.POST['first_name']
+        usuario.last_name = request.POST['last_name']
         usuario.email = request.POST['email']        
-        usuarioForm.save()
+        usuario.save()
         return redirect('perfil')
         
 @login_required
