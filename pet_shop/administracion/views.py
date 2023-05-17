@@ -2,5 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-def login(request):
-    return HttpResponse('<h1>VENTANA DE LOGEO</H1>')
+def pedidos(request):
+    return render(request, 'administracion/pedidos.html')
+
+def stock(request):
+    return render(request, 'administracion/stock.html')

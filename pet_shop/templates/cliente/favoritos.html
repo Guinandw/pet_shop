@@ -1,17 +1,8 @@
-{% extends './base.html' %}
+{% extends 'pet_shop/base.html' %}
 {% load static %}
 
 {% block contenido %}
-    <div class="hero-wrap hero-bread" style="background-image: url({% static "publica/images/bg_1.jpg" %});">
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Wishlist</span></p>
-            <h1 class="mb-0 bread">My Wishlist</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+{% include 'pet_shop/banner.html' %}
 
     <section class="ftco-section ftco-cart">
 			<div class="container">
@@ -44,7 +35,7 @@
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+					             	<input type="number" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
 					          	</div>
 					          </td>
 						        

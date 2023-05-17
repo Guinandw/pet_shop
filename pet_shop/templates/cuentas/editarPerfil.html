@@ -1,0 +1,44 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+{% block css %}{% endblock css %}
+{% block contenido %}
+{% include 'pet_shop/banner.html' %}
+
+
+
+ <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 ftco-animate">
+            {% for message in messages %}
+              <div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+                {{message}}
+              </div>
+		        {% endfor %}
+              <form action="{% url 'editarPerfil' %}" class="billing-form" method='POST' name='editarPerfil'>
+                {% csrf_token %}
+                  <h3 class="mb-4 billing-heading">Ingrese sus datos</h3>
+                      <div class="row align-items-end">
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <p class="w-100 text-uppercase " >USUARIO: <spam class='text-primary'>{{user.username}}</spam></p>
+                          </div>
+                        </div>
+                        {% for campo in form %}
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                {{campo.label}}
+                                {{campo}}
+                                <p class="w-100">
+                                    {{campo.errors}}</p>
+                              </div>
+                            </div>
+                        {% endfor %}
+                    
+                      <div class="w-100"></div>
+                   <button type="submit" class='btn btn-primary w-100'>Guardar</button>
+                  </div>
+          |   </form>
+<br><br> 
+{% endblock contenido %}

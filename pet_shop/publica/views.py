@@ -4,19 +4,29 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 
+from publica.forms import ContactanosForms
+from publica.forms import EnviosForms
+from publica.forms import AltasForms
+from django.contrib import messages
+
 # Create your views here.
 def inicio(request):
+    titulo = 'Pet Shop'
+    contexto = { 'titulo' : titulo}
    
-    return render(request, 'publica/index.html')
+    return render(request, 'publica/index.html', contexto)
 
 def nosotros(request):
-    return render(request, 'publica/about.html')
+    titulo = 'Nosotros'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/about.html', contexto)
 
 
-@login_required
+
 def productos(request):
     lista_productos = [
         {
+            'categoria': 'frutas',
             'oferta':30,
             'nombre':'Naranja',
             'precio':'120',
@@ -24,6 +34,7 @@ def productos(request):
             'imagen': 'product-1.jpg'
         },
          {
+             'categoria': 'frutas',
             'oferta':0,
             'nombre':'Mandarina',
             'precio':120,
@@ -31,35 +42,40 @@ def productos(request):
             'imagen': 'product-2.jpg'
         }
         ]
-    
-    context = {
-                'productos': lista_productos
-    }
-    return render(request, 'publica/productos.html', context)
+    titulo = 'Productos'
+    contexto = { 'titulo' : titulo, 'productos': lista_productos}
+        
+    return render(request, 'publica/productos.html', contexto)
 
 
-def exit(request):
-    logout(request)
-    return redirect('inicio')
 
 
-def blog(request):
-    return render(request, 'publica/blog.html')
 
-def blog_single(request):
-    return render(request, 'publica/blog-single.html')
 
 def contactanos(request):
-    return render(request, 'publica/contacto.html')
+    titulo = 'Contactanos'
+    if(request.method=='POST'):
+        contacto_form = ContactanosForms(request.POST)
+        
+        if(contacto_form.is_valid()):
+            messages.success('Hemos recibido tus datos')
+        else:  
+            messages.warning(request, 'Por favor verificar los datos')
+    else:
+        contacto_form= ContactanosForms()
+            
+    
+    
+    contexto = { 
+                'titulo' : titulo,
+                'contacto_form': contacto_form
+                }
+    return render(request, 'publica/contacto.html', contexto)
 
-def carrito(request):
-    return render(request, 'publica/cart.html')
 
-def checkout(request):
-    return render(request, 'publica/checkout.html')
-
-def favoritos(request):
-    return render(request, 'publica/favoritos.html')
 
 def producto_simple(request):
-    return render(request, 'publica/product-single.html')
+    titulo = 'Producto'
+    contexto = { 'titulo' : titulo}
+    return render(request, 'publica/product-single.html', contexto)
+

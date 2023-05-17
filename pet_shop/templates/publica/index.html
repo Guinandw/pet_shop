@@ -1,42 +1,11 @@
-{% extends './base.html' %}
+{% extends 'pet_shop/base.html' %}
 {% load static %}
 {% block css %}{% endblock css %}
 {% block contenido %}
 
 {% comment "banner" %} banner de inicio{% endcomment %}
-<section id="home-section" class="hero">
-		  <div class="home-slider owl-carousel">
-	      <div class="slider-item" style="background-image: url('{% static "publica/images/bg_1.jpg" %}');">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+{% include './carousel.html' %}
 
-	            <div class="col-md-12 ftco-animate text-center">
-	              <h1 class="mb-2">Distribuidores directos de piedras sanitarias</h1>
-	              <h2 class="subheading mb-4">Realizamos la distribucion de tus productos</h2>
-	              <p><a href="{% url 'productos' %}" class="btn btn-primary">Ver Productos</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="slider-item" style="background-image: url('{% static "publica/images/bg_2.jpg" %}');">
-	      	<div class="overlay"></div>
-	        <div class="container">
-	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
-
-	            <div class="col-sm-12 ftco-animate text-center">
-	              <h1 class="mb-2">Sigue nuestro Blog de Noticias</h1>
-	              <h2 class="subheading mb-4">Mantente al tanto de lo ultimo</h2>
-	              <p><a href="{% url 'blog' %}" class="btn btn-primary">Ver Blog</a></p>
-	            </div>
-
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-</section>
 <br>
 <br>
 
