@@ -20,15 +20,11 @@
                   <p class="w100">{{user.first_name}}</p>
                   <p class="w100">{{user.last_name}}</p>
                   <p class="w100">{{user.email}}</p>
-                  <form action="{% url 'editarUsuario' %}" method="post">
-                    <button class='btn btn-primary' type="submit">Editar</button>
-                  </form>
+                  {% comment %} <a href='{% url 'editarUsuario' %}' class='btn btn-primary' >Editar</a> {% endcomment %}
                   <h3 class="mt-4 mb-4 billing-heading">Informacion Adicional</h3>
                   {% if adicional == 'No ha agregado informacion adicional' %}
                     <p class="mb-3">{{adicional}}</p>
-                    <form action="{% url 'editarPerfil' %}" method="post">
-                      <button class='btn btn-primary' type="submit">AGREGAR</button>
-                    </form>
+                      <a href='{% url 'editarPerfil' %}' class='btn btn-primary'>AGREGAR</a>
                   {% else %}
                     <p class="w-100 mb-3">{{ adicional.dni}}</p>
                     <p class="w-100 mb-3">{{ adicional.cuit}}</p>
@@ -36,29 +32,9 @@
                     <p class="w-100 mb-3">{{ adicional.ciudad}}</p>
                     <p class="w-100 mb-3">{{ adicional.cp}}</p>
                     <p class="w-100 mb-3">{{ adicional.telefono}}</p>
-                    <form action="" method="post">
-                      <button class='btn btn-primary' type="submit">Editar</button>
-                    </form>
+                    <a href='{% url 'editarPerfil' %}' class='btn btn-primary'>Editar</a>
                   {% endif %}
-              {% comment %} <form action="{% url 'perfil' %}" class="billing-form" method='POST' name='perfil'>
-                {% csrf_token %}
-                <h3 class="mb-4 billing-heading">Informacion Adicional</h3>
-                  <div class="row align-items-end">
-                        {% for campo in form %}
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <p class="w-100">{{campo.label}}</p>
-                              <p class="w100">{{campo}}</p>
-                              <p class="w100">{{campo.errors}}</p>
-                            </div>
-                          </div>
-                        {% endfor %}
-                      <div class="w-100"></div>
-                      <div class="w-100">
-                          <button type="submit" class='btn btn-primary py-3 px-4 w-100'  >Guardar</button>
-                      </div>
-                  </div>
-              </form> {% endcomment %}
+             
 <br><br>
 {% endblock contenido %}
 {% endif %}

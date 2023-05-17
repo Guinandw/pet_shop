@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import Perfil
 import re
 
 def validador_nombres(value):
@@ -30,7 +31,8 @@ def validador_email(value):
 
 
 
-class userFormCompleto(forms.Form):
+
+class userFormCompleto(forms.ModelForm):
     
     username = forms.CharField(
         label='Nombre de Usuario',
@@ -82,20 +84,20 @@ class userFormCompleto(forms.Form):
     )
     
     
-    """ class Meta:
+    class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2') """
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
 
 
 
 
-class PerfilForm(forms.Form):
+class PerfilForm(forms.ModelForm):
     
     
-    dni = forms.CharField(
+    dni = forms.IntegerField(
         label='DNI',
-        max_length=11,
-        validators=(validador_numeros,),
+        min_value=1000000,
+        max_value=99999999,
         required=True,
         error_messages={
             'required':'Ha ingresado un DNI invalido'
@@ -103,10 +105,8 @@ class PerfilForm(forms.Form):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'DNI...', 'type':'number'})
     )
     
-    cuit = forms.CharField(
+    cuit = forms.IntegerField(
         label='CUIT',
-        max_length=11,
-        validators=(validador_numeros,),
         required=True,
         error_messages={
             'required':'Ha ingresado un CUIT invalido'
@@ -118,7 +118,7 @@ class PerfilForm(forms.Form):
         label='Direccion de Envio',
         required=True,
         max_length=200,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Direccion...'})
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Direccion...','type':'text'})
     )
     
         
@@ -126,21 +126,18 @@ class PerfilForm(forms.Form):
         label='Ciudad',
         max_length=50,
         required=True,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ciudad...'})
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Ciudad...','type':'text'})
     ) 
     
-    cp = forms.CharField(
+    cp = forms.IntegerField(
         label='Codigo Postal',
-        max_length=50,
         required=True,
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'direccion...'})
+        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Codigo Postal...','type':'number'})
     )
     
-    telefono = forms.CharField(
+    telefono = forms.IntegerField(
         label='Telefono',
-        max_length=15,
         required=True,
-        validators=(validador_numeros, ),
         error_messages={
             'required':'Ha ingresado un telefono invalido'
         },
@@ -149,13 +146,27 @@ class PerfilForm(forms.Form):
     
     
     def clean_mensaje(self):
-        usuario = self.cleaned_data['usuario']
-        if len(usuario) < 6:
+        dni = self.cleaned_data['dni']
+        if len(dni) < 6 and len(dni)>8:
             raise ValidationError('Debe tener 6 digitos o mas.')
-        return usuario
+        return dni
     
-    
+    class Meta:
+        model = Perfil
+        fields = ('dni', 'cuit', 'direccion', 'ciudad', 'cp', 'telefono')
 
+
+class editarUsuario(forms.ModelForm):
+    
+    class Meta:
+        model= User
+        fields = ('first_name', 'last_name', 'email')
+        labels = {
+            'first_name':'Nombre',
+            'last_name':'Apellido',
+            'email':'Correo'
+        }  
+        
     
        
     

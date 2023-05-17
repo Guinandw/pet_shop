@@ -11,7 +11,7 @@ class Perfil(models.Model):
     ciudad = models.CharField(max_length=100, verbose_name='Ciudad')
     cp = models.IntegerField( verbose_name='Codigo Postal')
     telefono = models.IntegerField(verbose_name='Telefono')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     
     
             

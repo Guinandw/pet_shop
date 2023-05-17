@@ -6,5 +6,5 @@ urlpatterns = [
     path("crearCuenta/", views.crearCuenta, name="registro"),
     path('perfil/', views.perfil, name='perfil'),
     path('editarUsuario/', views.editarUsuario, name='editarUsuario'),
-    path('editarPerfil/', views.editarPerfil, name='editarPerfil'),
+    path('editarPerfil', views.editarPerfil, name='editarPerfil'),
 ]

@@ -15,7 +15,7 @@
                 {{message}}
               </div>
 		        {% endfor %}
-              <form action="{% url 'editarUsuario' %}" class="billing-form" method='POST' name='editarUsuario'>
+              <form action="{% url 'editarPerfil' %}" class="billing-form" method='POST' name='editarPerfil'>
                 {% csrf_token %}
                   <h3 class="mb-4 billing-heading">Ingrese sus datos</h3>
                       <div class="row align-items-end">
@@ -26,21 +26,19 @@
                           </div>
                         </div>
                         {% for campo in form %}
-                          {% if campo.label == 'Nombre de Usuario' or campo.label == 'Password' or campo.label == 'Confirmar Password'%}
-                          {% else %}
                             <div class="col-md-12">
                               <div class="form-group">
                                 {{campo.label}}
                                 {{campo}}
-                                <p class="w-100">{{campo.errors}}</p>
+                                <p class="w-100">
+                                    {{campo.errors}}</p>
                               </div>
                             </div>
-                          {% endif %}
                         {% endfor %}
                     
                       <div class="w-100"></div>
                    <button type="submit" class='btn btn-primary w-100'>Guardar</button>
                   </div>
-          </form>
+          |   </form>
 <br><br> 
 {% endblock contenido %}

@@ -20,8 +20,10 @@
                   <h3 class="mb-4 billing-heading">Ingrese sus datos</h3>
                       <div class="row align-items-end">
                         
-                        <div class="col-md-12">{{form.as_p}}</div>
-                        {% comment %} {% for campo in form %}
+                        {% comment %} <div class="col-md-12">
+                          {{form.as_p}}
+                        </div> {% endcomment %}
+                        {% for campo in form %}
                           <div class="col-md-12">
                           <div class="form-group">
                             {{campo.label}}
@@ -29,38 +31,8 @@
                             <p class="w-100">{{campo.errors}}</p>
                       </div>
                       </div>
-                      {% endfor %} {% endcomment %}
-                     
-                      {% comment %} <div class="w-100">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label for="country">State / Country</label>
-                                      <div class="select-wrap">
-                                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                              <select name="" id="" class="form-control">
-                                                  <option value="">France</option>
-                                                  <option value="">Italy</option>
-                                                  <option value="">Philippines</option>
-                                                  <option value="">South Korea</option>
-                                                  <option value="">Hongkong</option>
-                                                  <option value="">Japan</option>
-                                              </select>
-                                      </div>
-                              </div>
-                          </div>
-                      </div> {% endcomment %}
-                     
-
-                          
+                      {% endfor %}
                       <div class="w-100"></div>
-                      {% comment %} <div class="col-md-12">
-                          <div class="form-group mt-4">
-                                              <div class="radio">
-                                              <label class="mr-3"><input type="radio" name="optradio"> Create an Account? </label>
-                                              <label><input type="radio" name="optradio"> Ship to different address</label>
-                                              </div>
-                          </div>
-                      </div> {% endcomment %}
                       <div class="w-100">
                           <button type="submit" class='btn btn-primary py-3 px-4 w-100'  >REGISTRARSE</button>
                       </div>
