@@ -110,10 +110,11 @@ def editarPerfil(request):
         perfil = get_object_or_404(Perfil,user_id = request.user.id)
         form = PerfilForm(instance=perfil)
     except Http404:
+        perfil = 0
         form = PerfilForm()
     
     if request.method == 'GET':
-        print(perfil.user.id)
+       
         return render(request, 
                       'cuentas/editarPerfil.html', 
                       {'form':form})
@@ -131,5 +132,5 @@ def editarPerfil(request):
             perfil.user = user  
             
         perfil.save()  
-        return redirect('inicio')
+        return redirect('perfil')
            
