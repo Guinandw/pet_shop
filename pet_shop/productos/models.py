@@ -5,15 +5,15 @@ class Animal(models.Model):
     tipo = models.CharField(verbose_name='tipo', max_length=20)
     
 class Raza(models.Model):
-    raza = models.CharField(verbose_name='raza')
-    tamanio = models.CharField(verbose_name='tamaño')
+    raza = models.CharField(verbose_name='raza',max_length=20)
+    tamanio = models.CharField(verbose_name='tamaño',max_length=20)
     tipo = models.ForeignKey(Animal, on_delete=models.CASCADE)
     
 class Productor(models.Model):
     marca = models.CharField(verbose_name='marca', max_length=50)
     origen = models.CharField(verbose_name='pais', max_length=50)
 
-class Proveedor(models.Models):
+class Proveedor(models.Model):
     empresa = models.CharField(verbose_name='nombre empresa', max_length=100)
     contacto = models.CharField(verbose_name='contacto', max_length=50)
     cargo_contacto = models.CharField(verbose_name='cargo contacto', max_length=100)
