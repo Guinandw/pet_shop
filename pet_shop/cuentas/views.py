@@ -119,18 +119,28 @@ def editarPerfil(request):
                       'cuentas/editarPerfil.html', 
                       {'form':form})
     else:
-        user = User.objects.get(pk=request.user.id)
-        if isinstance(perfil, Perfil):
-            print('dentro de isInstance')
-            form = PerfilForm(request.POST, instance=perfil)
-            print(form)
-            perfil = form.save(commit=False)
-        else:
+            if isinstance(perfil, Perfil):
+                print('dentro de isInstance')
+                try:
+                    form = PerfilForm(request.POST, instance=perfil)
+                    perfil = form.save(commit=False)
+                except ValueError:
+                    messages.warning(request,'Verificar Datos')
+                    return render(request, 'cuentas/editarPerfil.html', 
+                      {'form':form})
+                    
+            else:
+                try:
+                    form = PerfilForm(request.POST)
+                    perfil = form.save(commit=False)
+                    perfil.user = request.user
+                except ValueError:
+                    messages.warning(request,'Verificar Datos')
+                    return render(request, 
+                      'cuentas/editarPerfil.html', 
+                      {'form':form})
+                    
+            perfil.save()  
+            return redirect('perfil')
+        
             
-            form = PerfilForm(data=request.POST)
-            perfil = form.save(commit=False)
-            perfil.user = user  
-            
-        perfil.save()  
-        return redirect('perfil')
-           
