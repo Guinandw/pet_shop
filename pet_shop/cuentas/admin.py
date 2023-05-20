@@ -3,5 +3,3 @@ from .models import Perfil
 
 # Register your models here.
 admin.site.register(Perfil)
-#admin.site.register(Empleado)
-#admin.site.register(Direccion)
