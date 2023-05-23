@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-        
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cliente',
     'carrito',
     'cuentas',
+    'productos'
 ]
 
 MIDDLEWARE = [
@@ -134,7 +135,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = [ "%d %B, %Y", ]   # '25 October, 2006'
 
+DATETIME_INPUT_FORMATS = ["%m/%d/%y %H:%M",]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -153,9 +156,13 @@ STATIC_ROOT = BASE_DIR / 'static_root'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+#donde vamos a ir guardar los archivos medias debug
+MEDIA_URL = "/media/"
+#media para produccion
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 LOGIN_URL='login'
 #VARIABLES DE REDIRECCION DE LOGIN Y LOGOUT
 LOGIN_REDIRECT_URL ='inicio'
 LOGOUT_REDIRECT_URL = 'inicio'
+
