@@ -28,9 +28,7 @@ def blog_single(request):
 
 class BlogListView(ListView):
     model = Blog
-    
     template_name = 'blog/blog.html'
-    #ordering = ['-fecha']
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,7 +48,7 @@ class BlogListViewDetail(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #context['blogs'] = Blog.objects.all()
+        context['blogs'] = Blog.objects.all().order_by('-fecha')[0:3]
         context['blog'] = self.blog
         context['titulo'] = 'Blog de Novedades'
         return context    
@@ -63,6 +61,7 @@ class BlogCreateView(CreateView):
     form_class = BlogCrearForm
     template_name = 'blog/crearBlog.html'
     success_url = reverse_lazy('blog')
+    
     
 class BlogUpdateView(UpdateView):
     model = Blog

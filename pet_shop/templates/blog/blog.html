@@ -13,8 +13,8 @@
 				{% for blog  in blogs  %}
 					<div class="col-md-12 d-flex ftco-animate">
 		            <div class="blog-entry align-self-stretch d-md-flex">
-		              <a href="blog-single.html" class="block-20" 
-                  style="background-image: url('{% static '/' %}{{blog.imagen}} ');">
+		              <a href="{% url 'blog_single' blog.id %}" class="block-20" 
+                  style="background-image: url('/media/{{blog.imagen}}');">
 		              </a>
 		              <div class="text d-block pl-md-4">
 		              	<div class="meta mb-3">

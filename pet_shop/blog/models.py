@@ -7,12 +7,18 @@ class Blog(models.Model):
     subtitulo= models.CharField(max_length=300, null=True, blank=True,verbose_name='Subtitulo')
     fecha = models.DateTimeField(auto_now_add=True, verbose_name='Fecha')
     contenido = models.TextField(verbose_name='Contenido', )
-    imagen = models.ImageField(upload_to='blog/images/', null=True, blank=True)
+    imagen = models.ImageField(upload_to='blog/', null=True, blank=True)
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.titulo
     
-
+    """ @property
+    def imagen_url(self):
+        if self.imagen and hasattr(self.imagen, 'url'):
+            return self.imagen.url """
+    
     class Meta:
         db_table = 'blog'
         managed = True

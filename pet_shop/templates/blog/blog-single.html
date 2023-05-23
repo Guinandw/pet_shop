@@ -10,10 +10,12 @@
         <div class="row">
           <div class="col-lg-8 ftco-animate">
 						<h2 class="mb-3">{{blog.titulo}}</h2>
+            {% if blog.subtitulo %}
             <p>{{blog.subtitulo}}</p>
+            {% endif %}
             
             <p>
-              <img src="{% static '/' %}{{blog.imagen}}" alt="" class="img-fluid">
+              <img src="/media/{{blog.imagen}}" alt="" class="img-fluid">
             </p>
             <p>{{blog.contenido}}</p>
             
@@ -82,41 +84,23 @@
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3 class="heading">Recent Blog</h3>
+              <h3 class="heading">Articulos Recientes</h3>
+              {% for blog in blogs  %}
               <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url({% static 'publica/images/image_1.jpg' %});"></a>
+                <a class="blog-img mr-4" style="background-image: url('/media/{{blog.imagen}}');"></a>
                 <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <h3 class="heading-1"><a href="{% url 'blog_single' blog.id %}">{{blog.titulo}}</a></h3>
                   <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span>{{blog.fecha}}</a></div>
+                    <div><a href="#"><span class="icon-person"></span> {{blog.user.first_name}} </a></div>
                   </div>
                 </div>
               </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url({% static 'publica/images/image_2.jpg' %});"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-              <div class="block-21 mb-4 d-flex">
-                <a class="blog-img mr-4" style="background-image: url({% static 'publica/images/image_3.jpg' %});"></a>
-                <div class="text">
-                  <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span> April 09, 2019</a></div>
-                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              
+              {% endfor %}
+              
+              
+              
 
             <div class="sidebar-box ftco-animate">
               <h3 class="heading">Tag Cloud</h3>
