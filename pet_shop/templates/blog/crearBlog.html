@@ -1,0 +1,40 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+{% block css %}{% endblock css %}
+{% block contenido %}
+
+{% include 'blog/banner.html' %}
+
+
+<section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 ftco-animate">
+            {% for message in messages %}
+			<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+				{{message}}
+			</div>
+		    {% endfor %}
+            <form action="{% url 'nuevoBlog' %}" class="billing-form" method='POST' enctype="multipart/form-data" >
+                {% csrf_token %}
+                  <h3 class="mb-4 billing-heading">Nuevo Blog</h3>
+                    <div class="row align-items-end">
+                        
+                        {% for campo in form %}
+                          <div class="col-md-12">
+                            <div class="form-group">
+                                <p class="w-100">{{campo.label}}</p>
+                                {{campo}}
+                                <p class="w-100">{{campo.errors}}</p>
+                            </div>
+                          </div>
+                        {% endfor %}
+                        <div class="w-100"></div>
+                        <div class="w-100">
+                            <button type="submit" class='btn btn-primary py-3 px-4 w-100'  >Guardar</button>
+                        </div>
+                    </div>
+          </form>
+<br><br>
+
+{% endblock contenido %}

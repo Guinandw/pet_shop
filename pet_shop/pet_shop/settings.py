@@ -135,7 +135,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = [ "%d %B, %Y", ]   # '25 October, 2006'
 
+DATETIME_INPUT_FORMATS = ["%m/%d/%y %H:%M",]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
