@@ -14,10 +14,7 @@ class Blog(models.Model):
     def __str__(self):
         return self.titulo
     
-    """ @property
-    def imagen_url(self):
-        if self.imagen and hasattr(self.imagen, 'url'):
-            return self.imagen.url """
+    
     
     class Meta:
         db_table = 'blog'
