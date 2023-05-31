@@ -11,35 +11,36 @@
     			<div class="col-md-10 mb-5 text-center">
     				<ul class="product-category">
     					<li class="product-list-item " data-filter='todo'><a href="#productos" class=" producto-activo active">Todo</a></li>
-    					<li class="product-list-item" data-filter='vegetales'><a href="#productos" class='producto-activo'>Vegetales</a></li>
-    					<li class="product-list-item" data-filter='frutas'><a href="#productos" class='producto-activo'>Frutas</a></li>
-    					<li class="product-list-item" data-filter='jugos'><a href="#productos" class='producto-activo'>Jugos</a></li>
-    					<li class="product-list-item" data-filter='secos'><a href="#productos" class='producto-activo'>Secos</a></li>
+    					<li class="product-list-item" data-filter='Perro'><a href="#productos" class='producto-activo'>Perro</a></li>
+    					<li class="product-list-item" data-filter='Gato'><a href="#productos" class='producto-activo'>Gatos</a></li>
+    					<li class="product-list-item" data-filter='Ave'><a href="#productos" class='producto-activo'>Aves</a></li>
+    					<li class="product-list-item" data-filter='Pez'><a href="#productos" class='producto-activo'>Peces</a></li>
     				</ul>
     			</div>
     		</div>
     		<div class="row">
-				{% if productos|length > 0 %}
+				{% if productos|length > 0  %}
 			
 				{% for producto in productos %}
-				<div class="col-md-6 col-lg-3 ftco-animate filter {{producto.categoria}}">
+				<div class="col-md-6 col-lg-3 ftco-animate filter {{producto.raza.tipo}}">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/' %}{{producto.imagen}} alt="Colorlib Template">
+    					<a href="{% url 'producto_simple' producto.id %}" class="img-prod"><img class="img-fluid" src="/media/{{producto.imagen}}" alt="Colorlib Template" width=150 height=100>
     						{% if producto.oferta > 0 %}
 							<span class="status">{{producto.oferta}}%</span>
 							{% endif %}
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">{{producto.nombre}}</a></h3>
+    						<h3><a href="{% url 'producto_simple' producto.id %}">{{producto.nombre}} </a></h3>
+							<p>{{producto.formato}}</p>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span class="mr-2 price-dc">${{producto.precio}}</span><span class="price-sale">${{producto.descuento}}</span></p>
+		    						<p class="price"><span class="mr-2"></span><span class="price-sale">${{producto.precio}}</span></p>
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
 	    						<div class="m-auto d-flex">
-	    							<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    							<a href="{% url 'producto_simple' producto.id %}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 	    								<span><i class="ion-ios-menu"></i></span>
 	    							</a>
 	    							<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -55,7 +56,7 @@
     			</div>
 				{% endfor %}
 				{% endif %}
-    			<div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
+    			{% comment %} <div class="col-md-6 col-lg-3 ftco-animate filter vegetales">
     				<div class="product">
     					<a href="#" class="img-prod"><img class="img-fluid" src={% static 'publica/images/product-1.jpg' %} alt="Colorlib Template">
     						<span class="status">30%</span>
@@ -397,11 +398,11 @@
     						</div>
     					</div>
     				</div>
-    			</div>
+    			</div> {% endcomment %}
     		</div>
     		<div class="row mt-5">
 
-          <div class="col text-center">
+          {% comment %} <div class="col text-center">
             <div class="block-27">
               <ul>
                 <li><a href="#">&lt;</a></li>
@@ -413,7 +414,7 @@
                 <li><a href="#">&gt;</a></li>
               </ul>
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
     	</div>
 </section>

@@ -39,7 +39,6 @@ class BlogListView(ListView):
 class BlogListViewDetail(ListView):
     model = Blog
     template_name = 'blog/blog-single.html'
-    ordering = ['id']
     
     def get_queryset(self):
         self.blog = get_object_or_404(Blog, pk=self.kwargs["blog_id"])
