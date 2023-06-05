@@ -9,14 +9,14 @@
                             <div class="text text-center">
                                 <h2>LOS MEJOR PARA TU MASCOTA</h2>
                                 <p style='color:white;'>Comida, juguetes y mas!</p>
-                                <p><a href="{% url 'carrito' %}" class="btn btn-primary">Comprar Ahora</a></p>
+                                <p><a href="{% url 'productos' %}" class="btn btn-primary">Comprar Ahora</a></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url('{% static "publica/images/cat-gc3d980a0a_640.jpg" %}');" >
                             <div class="text px-3 py-1">
-                                <h2 class="mb-0"><a href="#">Gatos</a></h2>
+                                <h2 class="mb-0 product-list-item" data-filter='Gato'><a href="{% url 'productos' %}" class='producto-activo'>Gatos</a></h2>
                             </div>
                         </div>
                         <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url('{% static "publica/images/pet-gc2079c6a3_640.jpg" %}');">

@@ -6,7 +6,7 @@ from carrito.forms import EnviosForms
 
 # Create your views here.
 
-def carrito(request):
+def tienda(request):
     titulo = 'Carrito de Compras'
     contexto = { 'titulo' : titulo}
     return render(request, 'carrito/cart.html', contexto)
