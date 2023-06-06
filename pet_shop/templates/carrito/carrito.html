@@ -14,7 +14,7 @@
 						    <thead class="thead-primary">
 						      <tr class="text-center">
 						        <th>&nbsp;</th>
-						        <th>&nbsp;</th>
+						        
 						        <th>Producto</th>
 						        <th>Precio</th>
 						        <th>Cantidad</th>
@@ -22,50 +22,46 @@
 						      </tr>
 						    </thead>
 						    <tbody>
+								{% if request.session.carrito.items %}
+								
+							
+								{% for key, value  in request.session.carrito.items  %}
+								
+								
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+						        <td class="product-remove"><a href="{% url 'eliminar_producto' value.producto_id %}"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static "publica/images/product-3.jpg" %});"></div></td>
+						        {% comment %}  <td class="image-prod"><div class="img" style="background-image:url(/media/{{value.imagen}};"></div></td>{% endcomment %}
 						        
 						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
+						        	<h3>{{value.nombre}}</h3>
 						        </td>
 						        
-						        <td class="price">$4.90</td>
+						        <td class="price">{{value.valor}}</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
+										<span class="input-group-btn col-md-3 mr-3">
+											<a href="{% url 'sacar_producto' value.producto_id 2 %}" class=" btn"  >
+										   	<i class="ion-ios-remove"></i>
+											</a>
+										</span>
+					             		<input type="text"  class="quantity form-control input-number col-md-6" value="{{value.cantidad}}" min="0" max="100" readonly>
+									 	<span class="input-group-btn col-md-3">
+											<a href="{% url 'agregar_producto' value.producto_id 2 %}" class=" btn" >
+										 	<i class="ion-ios-add"></i>
+									 		</a>
+								</div>
 					          </td>
 						        
-						        <td class="total">$4.90</td>
+						        <td class="total">{{value.subtotal}}</td>
 						      </tr><!-- END TR-->
+							  {% endfor %}
 
-						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-						        
-						        <td class="image-prod"><div class="img" style="background-image:url({% static "publica/images/product-4.jpg" %});"></div></td>
-						        
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-						        
-						        <td class="price">$15.70</td>
-						        
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-									<div class="quantity-right-plus">+</div>
-					             	<input name="quantity" class="quantity form-control input-number" value="1" min="1" max="100" type='number'>
-									<div class="quantity-left-minus">-</div>
+							  {% else %}
 
-					          	</div>
-					          </td>
-						        
-						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
+							  {% endif %}
+						    
 						    </tbody>
 						  </table>
 					  </div>
@@ -74,18 +70,12 @@
     		<div class="row justify-content-end">
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
-    					<h3>Coupon Code</h3>
-    					<p>Aca podriamos mostrar la info del cliente</p>
-  						<form action="#" class="info">
-	              <div class="form-group">
-	              	<label for="">Coupon code</label>
-	                <input type="text" class="form-control text-left px-3" placeholder="">
-	              </div>
+    					<h3>Nueva Orden</h3>
 	            </form>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+    				<p><a href="{% url 'limpiar_carrito' %}" class="btn btn-primary py-3 px-4">Limpiar Carrito</a></p>
     			</div>
-    			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
+    			{% comment %} <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Estimate shipping and tax</h3>
     					<p>Este cuadro esta bueno para seleccionar la direccioni de envio, que provenga de una lista del cliente.</p>
@@ -105,29 +95,17 @@
 	            </form>
     				</div>
     				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Estimate</a></p>
-    			</div>
+    			</div>  {% endcomment %}
     			<div class="col-lg-4 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
-    					<p class="d-flex">
-    						<span>Subtotal</span>
-    						<span>$20.60</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Delivery</span>
-    						<span>$0.00</span>
-    					</p>
-    					<p class="d-flex">
-    						<span>Discount</span>
-    						<span>$3.00</span>
-    					</p>
-    					<hr>
+    					    					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>$17.60</span>
+    						<span>${{total_carrito}}</span>
     					</p>
     				</div>
-    				<p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+    				<p><a href="{% url 'checkout' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
     			</div>
     		</div>
 			</div>
