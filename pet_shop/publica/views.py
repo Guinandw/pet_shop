@@ -23,7 +23,7 @@ def nosotros(request):
 
 
 
-def productos(request):
+""" def productos(request):
     lista_productos = [
         {
             'categoria': 'frutas',
@@ -46,7 +46,7 @@ def productos(request):
     contexto = { 'titulo' : titulo, 'productos': lista_productos}
         
     return render(request, 'publica/productos.html', contexto)
-
+ """
 
 
 
@@ -74,8 +74,8 @@ def contactanos(request):
 
 
 
-def producto_simple(request):
+""" def producto_simple(request):
     titulo = 'Producto'
     contexto = { 'titulo' : titulo}
     return render(request, 'publica/product-single.html', contexto)
-
+ """

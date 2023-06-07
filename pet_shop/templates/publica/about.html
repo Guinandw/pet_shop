@@ -15,44 +15,32 @@
               <div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
                 <div class="heading-section-bold mb-4 mt-md-5">
                   <div class="ml-md-0">
-                    <h2 class="mb-4">Welcome to Vegefoods an eCommerce website</h2>
+                    <h2 class="mb-4">Nuestra Mision</h2>
                   </div>
                 </div>
                 <div class="pb-md-5">
-                  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                  <p>But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                  <p><a href="{% url 'productos' %}" class="btn btn-primary">Comprar ahora</a></p>
+                  <p>Contribuimos a crear un mundo mejor. </p>
+                  <p>Ayudamos a amar y proteger a sus mascotas.
+                    Creamos equipos de trabajo solidarios, proactivos y capacitados.
+                    Invertimos e Innovamos para poder seguir mejorando y poder acercarnos cada día más.
+                    Priorizamos el aporte y la participación solidaria para crear una comunidad inclusiva y el cuidado del medio ambiente.</p>
+                  
+                  
                 </div>
               </div>
             </div>
           </div>
 </section>
 
-<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
-          <div class="container py-4">
-            <div class="row d-flex justify-content-center py-5">
-              <div class="col-md-6">
-                <h2 style="font-size: 22px;" class="mb-0">Subcribe to our Newsletter</h2>
-                <span>Get e-mail updates about our latest shops and special offers</span>
-              </div>
-              <div class="col-md-6 d-flex align-items-center">
-                <form action="#" class="subscribe-form">
-                  <div class="form-group d-flex">
-                    <input type="text" class="form-control" placeholder="Enter email address">
-                    <input type="submit" value="Subscribe" class="submit px-3">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-</section>
+{% include 'pet_shop/suscribirse.html' %}
+
 		{% comment "comentario" %}{% endcomment %}
 
-{% include './happy-customers.html' %}
+{% comment %} {% include 'pet_shop/happy-customers.html' %}
 
-{% include './testimonios.html' %}
+{% include 'pet_shop/testimonios.html' %} {% endcomment %}
 
-{% include './free-shipping.html' %}
+{% include 'pet_shop/free-shipping.html' %}
 
     
 {% endblock contenido %}

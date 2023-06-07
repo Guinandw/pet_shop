@@ -1,7 +1,8 @@
 from typing import Any, Dict, Optional
 from django.db import models
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpRequest
+from django.http import HttpRequest, response
 from django.views.generic import ListView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Blog
@@ -17,11 +18,11 @@ from django.urls import reverse_lazy
     contexto = { 'titulo' : titulo}
     return render(request, 'blog/blog.html', contexto) """
 
-def blog_single(request):
+""" def blog_single(request):
     titulo = 'Blog de Novedades'
     contexto = { 'titulo' : titulo}
     return render(request, 'blog/blog-single.html', contexto)
-    
+     """
 '''
         IMPLEMENTACION DEL BLOG CON VISTAS BASADAS EN CLASES
 '''
@@ -32,14 +33,20 @@ class BlogListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['blogs'] = Blog.objects.all().order_by('-fecha')
+        buscador = self.request.GET.get('buscarBlog')
+        if buscador:
+            context['blogs'] = Blog.objects.filter(titulo__icontains=buscador)
+        else:
+            context['blogs'] = Blog.objects.all().order_by('-fecha')
+        #context['blogs'] = self.blogs
         context['titulo'] = 'Blog de Novedades'
         return context
-
+    
+      
+ 
 class BlogListViewDetail(ListView):
     model = Blog
     template_name = 'blog/blog-single.html'
-    ordering = ['id']
     
     def get_queryset(self):
         self.blog = get_object_or_404(Blog, pk=self.kwargs["blog_id"])
