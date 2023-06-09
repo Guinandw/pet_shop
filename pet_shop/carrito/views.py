@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .Carrito import Carrito
+from .carrito import Carrito
 from productos.models import Producto
 
 from carrito.forms import EnviosForms
+from . import context_processor
 
 # Create your views here.
 
@@ -53,6 +54,7 @@ def limpiar_carrito(request):
 @login_required
 def checkout(request):
     carrito = Carrito(request)
+    total = context_processor.total_carrito(request)
     titulo = 'Chequeo de Compra'
     if(request.method=='POST'):
         envio = EnviosForms(request.POST)

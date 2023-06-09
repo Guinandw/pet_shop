@@ -118,9 +118,9 @@
 	          <div class="row mt-5 pt-3">
 	          	<div class="col-md-12 d-flex mb-5">
 	          		<div class="cart-detail cart-total p-3 p-md-4">
-	          			<h3 class="billing-heading mb-4">Cart Total</h3>
+	          			<h3 class="billing-heading mb-4">Total de Compra</h3>
 	          			<p class="d-flex">
-		    						<span>Subtotal</span>
+		    				{% comment %} 		<span>Subtotal</span>
 		    						<span>$40.60</span>
 		    					</p>
 		    					<p class="d-flex">
@@ -131,10 +131,10 @@
 		    						<span>Discount</span>
 		    						<span>$3.00</span>
 		    					</p>
-		    					<hr>
+		    					<hr> {% endcomment %}
 		    					<p class="d-flex total-price">
-		    						<span>Total</span>
-		    						<span>$17.60</span>
+		    						{% comment %} <span>Total</span> {% endcomment %}
+		    						<span>{{total_carrito}}</span>
 		    					</p>
 								</div>
 	          	</div>

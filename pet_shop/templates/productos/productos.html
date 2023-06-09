@@ -46,7 +46,7 @@
 	    							<a href="{% url 'agregar_producto' producto.id 1 %}" class="buy-now d-flex justify-content-center align-items-center mx-1">
 	    								<span><i class="ion-ios-cart"></i></span>
 	    							</a>
-	    							<a href="#" class="heart d-flex justify-content-center align-items-center ">
+	    							<a href="{% url 'agregar_favoritos' producto.id %}" class="heart d-flex justify-content-center align-items-center ">
 	    								<span><i class="ion-ios-heart"></i></span>
 	    							</a>
     							</div>
