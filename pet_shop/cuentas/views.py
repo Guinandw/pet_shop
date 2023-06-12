@@ -142,5 +142,10 @@ def editarPerfil(request):
                     
             perfil.save()  
             return redirect('perfil')
-        
-            
+@login_required     
+def eliminarPerfil(request):
+    user = User.objects.get(id=request.user.id)
+    user.is_active = False
+    user.save()
+    logout(request)
+    
