@@ -1,4 +1,5 @@
 from django import forms
+from .models import Orden
 from django.forms import ValidationError
 import re
 
@@ -26,7 +27,7 @@ def validador_email(value):
 
 
 
-class EnviosForms(forms.Form):
+class EnviosForms(forms.ModelForm):
     
     nombre = forms.CharField(
         label='Nombre',
@@ -76,14 +77,8 @@ class EnviosForms(forms.Form):
         widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Solo Numeros...', 'type':'number'})
     )
     
-    email = forms.EmailField(
-        label='Correo Electronico',
-        max_length=100,
-        required=True,
-        validators=(validador_email,),
-        error_messages={
-            'required': 'Se debe completar el Corrreo Electronico.'
-        },
-        widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'email', 'type': 'email'})
-    )
     
+    class Meta:
+        model = Orden
+        fields = ['nombre', 'apellido', 'direccion', 'ciudad', 'cp', 'telefono']
+

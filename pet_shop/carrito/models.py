@@ -3,7 +3,7 @@ from productos.models import Producto
 from django.contrib.auth.models import User
 # Create your models here.
 class Orden(models.Model):
-    no_factura = models.AutoField(unique=True, verbose_name='Numero Factura' )
+    no_factura = models.IntegerField(unique=True, verbose_name='Numero Factura', blank=True, null=True )
     fecha = models.DateTimeField(verbose_name='Fecha', auto_now_add=True )
     total = models.IntegerField(verbose_name='total', blank=True, null=True)
     estado = models.CharField(verbose_name='estado', max_length=50, default='verificando')
@@ -23,6 +23,7 @@ class Orden_detalle(models.Model):
     precio_unitario = models.IntegerField(verbose_name='precio unitario', blank=True, null=True)
     cantidad = models.IntegerField(verbose_name='cantidad')
     descuento = models.IntegerField(verbose_name='descuento', blank=True, null=True, default=0)
+    subtotal = models.FloatField(verbose_name='subtotal', blank=True, null=True)
     orden = models.ForeignKey(Orden, on_delete=models.CASCADE )
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
