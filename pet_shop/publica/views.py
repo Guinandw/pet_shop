@@ -35,7 +35,7 @@ def contactanos(request):
             messages.success(request,'Hemos recibido tus datos')
             nombre = contacto_form.cleaned_data['nombre']
             toemail= contacto_form.cleaned_data['email']
-            asunto = nombre +'Hemos recibido tu peticion sobre: '+request.POST['asunto']
+            asunto = nombre +'! Hemos recibido tu peticion sobre: '+contacto_form.cleaned_data['asunto']
             mensaje = contacto_form.cleaned_data['mensaje']
             mensaje_html=f"""
                 <p>De: {contacto_form.cleaned_data['nombre']} <a href="mailto:{contacto_form.cleaned_data['email']}">{contacto_form.cleaned_data['email']}</a></p>
