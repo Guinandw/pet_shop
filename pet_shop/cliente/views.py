@@ -1,9 +1,14 @@
+from typing import Any, Dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from productos.models import Producto
 from cuentas.models import User
 from .models import Favoritos
+
+from django.views.generic import ListView
+from carrito.models import Orden, Orden_detalle
 
 # Create your views here.
 @login_required
@@ -29,6 +34,35 @@ def eliminar_favoritos(request, producto_id):
     favorito.delete()
     return redirect('favoritos')
 
-@login_required
-def pedidos_pendientes(request):
-    return render(request, 'cliente/pedidos_pendientes.html')
+
+
+class PedidosPendienteView(LoginRequiredMixin,ListView):
+    model = Orden
+    template_name = 'cliente/pedidos_pendientes.html'
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['ordenes'] = Orden.objects.filter(cliente=self.request.user)
+        context['titulo'] = 'ORDENES PENDIENTES'
+        return context
+    
+class PedidosVistaDetalle(LoginRequiredMixin,ListView):
+    model = Orden_detalle
+    template_name = 'cliente/pedidos_pendientes_detalles.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["orden"] = Orden.objects.get(pk=self.kwargs['orden_id'])
+        context["detalles"] = Orden_detalle.objects.filter(orden = context["orden"])
+        return context
+    
+
+class PedidosHistorialView(LoginRequiredMixin,ListView):
+    model = Orden
+    template_name = 'cliente/pedidos_historial.html'
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['ordenes'] = Orden.objects.filter(cliente=self.request.user)
+        context['titulo'] = 'HISTORIAL DE ORDENES'
+        return context

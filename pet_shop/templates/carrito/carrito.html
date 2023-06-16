@@ -31,7 +31,7 @@
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="{% url 'eliminar_producto' value.producto_id %}"><span class="ion-ios-close"></span></a></td>
 						        
-						        {% comment %}  <td class="image-prod"><div class="img" style="background-image:url(/media/{{value.imagen}};"></div></td>{% endcomment %}
+						         {% comment %} <td class="image-prod"><img class="img-fluid" src="/media/{{value.imagen}}" alt="Colorlib Template" width=150 height=100></div></td> {% endcomment %}
 						        
 						        <td class="product-name">
 						        	<h3>{{value.nombre}}</h3>

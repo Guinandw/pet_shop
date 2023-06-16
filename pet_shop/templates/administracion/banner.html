@@ -1,0 +1,13 @@
+{% load static %}
+<div class="hero-wrap hero-bread" style="background-image: url('{% static "publica/images/bg_1.jpg" %}');">
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-9 ftco-animate text-center">
+          {% if request.user.is_authenticated  and user.is_staff %} 
+          <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'nuevoBlog' %}">Crear Articulo</a></span> <span>Blog</span></p>
+          {% endif %} 
+          <h1 class="mb-0 bread">ADMINISTRACION DE PEDIDOS</h1>
+        </div>
+      </div>
+    </div>
+  </div>

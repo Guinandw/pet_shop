@@ -1,0 +1,60 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+
+{% block contenido %}
+{% include 'pet_shop/banner.html' %}
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Fecha</th>
+						        <th>Factura</th>
+								<th>Usuario</th>
+                                <th>Estado</th>
+						        <th>Detalle</th>
+                                <th>&nbsp;</th>
+						        <th>Total</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								{% for orden in ordenes  %}
+								
+								
+						      <tr class="text-center mt-5">
+						        <th class="product-name">{{orden.fecha}}</th>
+						        
+                                {% if orden.no_factura %}
+                                <th class="product-name">{{orden.no_factura}}</th>
+                                {% else %}
+                                <th class="product-name">PENDIENTE</th>
+                                {% endif %}
+								<th class="product-name">{{orden.cliente.username}}</th>
+						        
+                               <th class="product-name">{% filter force_escape|upper %}{{orden.estado}}{% endfilter %}</th>
+						        
+						        
+						        <th >
+										<p><a href="{% url 'pedido_detalle' orden.pk %}" class="btn btn-primary py-3 px-5">Ver Detalle</a></p>
+					            </th>
+						        
+						        <th class="total">{{orden.total}}</th>
+						      </tr><!-- END TR-->
+							  {% endfor %}
+
+							 
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+		{% include 'pet_shop/suscribirse.html' %}
+
+{% endblock contenido %}

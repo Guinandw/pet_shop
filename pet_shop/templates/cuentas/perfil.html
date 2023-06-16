@@ -19,7 +19,7 @@
               <p class="w-100 text-uppercase " >USUARIO: <spam class='text-primary'>{{user.username}}</spam></p>
               <p class="w-100 text-uppercase " >Nombre: <spam class='text-primary'>{{user.first_name}}</spam></p>
               <p class="w-100 text-uppercase " >Apellido: <spam class='text-primary'>{{user.last_name}}</spam></p>
-              <p class="w-100 text-uppercase " >USUARIO: <spam class='text-primary'>{{user.email}}</spam></p>
+              <p class="w-100 text-uppercase " >EMAIL: <spam class='text-primary'>{{user.email}}</spam></p>
                   <a href='{% url 'editarUsuario' %}' class='btn btn-primary' >Editar</a>
                   <h3 class="mt-4 mb-4 billing-heading">Informacion Adicional</h3>
                   {% if adicional == 'No ha agregado informacion adicional' %}
@@ -34,7 +34,37 @@
                   <p class="w-100 text-uppercase " >Telefono: <spam class='text-primary'>{{ adicional.telefono}}</spam></p>
                   <a href='{% url 'editarPerfil' %}' class='btn btn-primary'>Editar</a>
                   {% endif %}
-             
+            </div>
+          </div>
+          <div class="col-lg-4 sidebar ftco-animate">
+            {% comment %} <div class="sidebar-box">
+              <form action="#" class="search-form">
+                <div class="form-group">
+                  <span class="icon ion-ios-search"></span>
+                  <input type="text" class="form-control" placeholder="Search...">
+                </div>
+              </form>
+            </div> {% endcomment %}
+             <div class="sidebar-box ftco-animate">
+            	<h3 class="heading">Opciones</h3>
+              <ul class="categories">
+                {% if request.user.is_staff %}
+                <li><a href="{% url 'pedidos' %}">Pedidos</a></li>
+                {% else %}
+                <li><a href="{% url 'pendientes' %}">Pedidos</a></li>
+                {% endif %}
+                {% if request.user.is_staff %}
+                {% else %}
+                <li><a href="{% url 'historial' %}">Historial</a></li>
+                <li><a href="{% url 'favoritos' %}">Favoritos</a></li>
+                {% endif %}
+                
+                
+                {% comment %} <li><a href="#">Dries <span>(42)</span></a></li> {% endcomment %}
+              </ul>
+            </div>
+          </div> 
+            
 <br><br>
 {% endblock contenido %}
 {% endif %}

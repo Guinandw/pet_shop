@@ -1,0 +1,25 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+
+{% block contenido %}
+{% include 'pet_shop/banner.html' %}
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Update">
+                    </form>
+                    
+
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+		{% include 'pet_shop/suscribirse.html' %}
+
+{% endblock contenido %}

@@ -10,23 +10,6 @@ from .forms import BlogCrearForm
 from django.urls import reverse_lazy
 
 
-# Create your views here.
-
-
-""" def blog(request):
-    titulo = 'Blog de Novedades'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'blog/blog.html', contexto) """
-
-""" def blog_single(request):
-    titulo = 'Blog de Novedades'
-    contexto = { 'titulo' : titulo}
-    return render(request, 'blog/blog-single.html', contexto)
-     """
-'''
-        IMPLEMENTACION DEL BLOG CON VISTAS BASADAS EN CLASES
-'''
-
 class BlogListView(ListView):
     model = Blog
     template_name = 'blog/blog.html'
@@ -38,7 +21,6 @@ class BlogListView(ListView):
             context['blogs'] = Blog.objects.filter(titulo__icontains=buscador)
         else:
             context['blogs'] = Blog.objects.all().order_by('-fecha')
-        #context['blogs'] = self.blogs
         context['titulo'] = 'Blog de Novedades'
         return context
     

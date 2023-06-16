@@ -25,7 +25,7 @@
 								
                                 {% if orden.estado == 'finalizado' %}
 
-								{% else %}
+								
 								
 						      <tr class="text-center mt-5">
 						        <th class="product-name">{{orden.fecha}}</th>
@@ -45,6 +45,7 @@
 						        
 						        <th class="total">{{orden.total}}</th>
 						      </tr><!-- END TR-->
+                              {% else %}
 							  {% endif %} 
 							  {% endfor %}
 

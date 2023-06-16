@@ -16,6 +16,12 @@ class Orden(models.Model):
     nombre = models.CharField(verbose_name='nombre', max_length=100, null=True, blank=True)
     apellido = models.CharField(verbose_name='apellido', max_length=100, null=True, blank=True)
     
+    
+    def __str__(self):
+        if self.no_factura:
+            return f" {self.no_factura} {self.cliente.first_name} {self.fecha.strftime('%d/%m/%y /%H:%M')} "
+        return f" Pendiente {self.cliente.first_name} {self.fecha.strftime('%d/%m/%y /%H:%M')} "
+    
    
             
     
@@ -28,5 +34,6 @@ class Orden_detalle(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
 
-        
+    def __str__(self):
+        return f"{self.orden.pk} {self.producto.nombre} "
         

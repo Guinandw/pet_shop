@@ -1,0 +1,81 @@
+{% extends 'pet_shop/base.html' %}
+{% load static %}
+
+{% block contenido %}
+{% include 'pet_shop/banner.html' %}
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+						<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Nombre</th>
+						        <th>No. Factura</th>
+                                <th>ESTADO</th>
+						        <th>TOTAL</th>
+						      </tr>
+							  <tbody>
+								<tr>
+									<th>{{orden.cliente.first_name}}</th>
+									{% if orden.no_factura %}
+                                	<th class="product-name">{{orden.no_factura}}</th>
+                                	{% else %}
+                                	<th class="product-name">PENDIENTE</th>
+                                	{% endif %}
+									<th>{{orden.estado}}</th>
+									<th>{{orden.total}}</th>
+								</tr>
+							  </tbody>
+						    </thead>
+
+
+                        </table>
+
+
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Cantidad</th>
+						        <th>Precio Unidad</th>
+                                <th>Descuento</th>
+								<th>Producto</th>
+						        <th>Subtotal</th>
+                                
+						      </tr>
+						    </thead>
+						    <tbody>
+								{% for detalle in detalles  %}
+								
+								
+						      <tr class="text-center">
+						        <td class="">{{detalle.cantidad}}</td>
+						        
+                                <td class="">{{detalle.precio_unitario}}</td>
+						        
+                               <td class="">{{detalle.descuento}}%</td>
+
+							   <td class="product-name">{{detalle.producto.nombre}}</td>
+
+							   <td class="total">{{detalle.subtotal}}</td>
+						        
+						       
+						        
+						       
+						      </tr><!-- END TR-->
+							  {% endfor %}
+
+						    
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+		{% include 'pet_shop/suscribirse.html' %}
+
+{% endblock contenido %}
