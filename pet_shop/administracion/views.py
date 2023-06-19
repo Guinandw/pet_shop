@@ -21,7 +21,14 @@ class PedidosTotales(LoginRequiredMixin, PermissionRequiredMixin,ListView):
     
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['ordenes'] = Orden.objects.all()
+        buscador = self.request.GET.get('buscarPedido')
+        
+        if buscador:
+            buscador = buscador.lower()
+            context['ordenes'] = Orden.objects.filter(estado=buscador)
+        else:
+            context['ordenes'] = Orden.objects.all()
+
         context['titulo'] = 'ORDENES PENDIENTES'
         return context
 
