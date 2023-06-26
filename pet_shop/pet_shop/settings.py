@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mjml',
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -167,6 +168,11 @@ LOGIN_URL='login'
 #VARIABLES DE REDIRECCION DE LOGIN Y LOGOUT
 LOGIN_REDIRECT_URL ='inicio'
 LOGOUT_REDIRECT_URL = 'inicio'
+
+#lineas para poder usar la libreria django-mjml y asi poder enviar email con HTML responsivo.
+MJML_BACKEND_MODE = 'cmd'
+MJML_EXEC_CMD = 'node_modules/.bin/mjml'
+
 
 #SE AGREGA LA CONFIGURACION PARA EL ENVIO DE EMAILS TRAIDOS DEL .ENV
 EMAIL_BACKEND=env('EMAIL_BACKEND')

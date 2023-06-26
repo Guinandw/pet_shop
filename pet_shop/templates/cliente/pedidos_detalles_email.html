@@ -1,8 +1,7 @@
-{% extends 'pet_shop/base.html' %}
+{% extends 'pet_shop/base_copy.html' %}
 {% load static %}
 
 {% block contenido %}
-{% include 'pet_shop/banner.html' %}
 
     <section class="ftco-section ftco-cart">
 			<div class="container">
@@ -12,10 +11,10 @@
 						<table class="table">
 						    <thead class="thead-primary">
 						      <tr class="text-center">
-						        <th>Nombre</th>
-						        <th>No. Factura</th>
-                                <th>ESTADO</th>
-						        <th>TOTAL</th>
+						        <th style='text-color=red;'>Nombre</th>
+						        <th style='text-color=red;'>No. Factura</th>
+                                <th style='text-color=red;'>ESTADO</th>
+						        <th style='text-color=red;'>TOTAL</th>
 						      </tr>
 							  <tbody>
 								<tr>
@@ -111,6 +110,5 @@
 			</div>
 		</section>
 
-		{% include 'pet_shop/suscribirse.html' %}
 
 {% endblock contenido %}

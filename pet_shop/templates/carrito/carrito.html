@@ -9,6 +9,11 @@
 			<div class="container">
 				<div class="row">
     			<div class="col-md-12 ftco-animate">
+					{% for message in messages %}
+						<div class="col-md-12 alert alert-{{ message.tags }}" role="alert">
+						{{message}}
+					</div>
+		{% endfor %}
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
@@ -29,7 +34,7 @@
 								
 								
 						      <tr class="text-center">
-						        <td class="product-remove"><a href="{% url 'eliminar_producto' value.producto_id %}"><span class="ion-ios-close"></span></a></td>
+						        <td class="product-remove" ><a href="{% url 'eliminar_producto' value.producto_id %}"><span class="ion-ios-close"></span></a></td>
 						        
 						         {% comment %} <td class="image-prod"><img class="img-fluid" src="/media/{{value.imagen}}" alt="Colorlib Template" width=150 height=100></div></td> {% endcomment %}
 						        

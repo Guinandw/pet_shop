@@ -1,14 +1,19 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.template.loader import render_to_string
+
 from .carrito import Carrito
+from . import body as Body
 from productos.models import Producto
 from .models import Orden, Orden_detalle
 from cuentas.models import Perfil
-from datetime import datetime
-
 from carrito.forms import EnviosForms
+
+from django.utils import timezone, dateformat
+from django.conf import settings
+
 from . import context_processor
 
 from django.core.mail import send_mail
@@ -66,9 +71,9 @@ def checkout(request):
     total = context_processor.total_carrito(request)
     orden = Orden()
     titulo = 'Chequeo de Compra'
-    now = datetime.now()
-    t = now.strftime("%d/%m/%Y  %H:%M")
-    
+    t = dateformat.format(timezone.now(), 'Y-m-d H:i' )
+  
+    print(t)
     
     
     if(request.method=='POST'):
@@ -87,8 +92,11 @@ def checkout(request):
             orden.total = total['total_carrito']
             orden.cliente = request.user
             
+            
+            
             orden.save()
-            orden_detalle = Orden_detalle()
+            body = Body.encabezado(orden)
+            #orden_detalle = Orden_detalle()
             for key, value in carrito.session['carrito'].items():
                 orden_detalle = Orden_detalle() #para que grabe un registro por cada producto que tiene la orden, se debe crear un objeto nuevo, sino hace un UPDATE.
                 orden_detalle.cantidad = value['cantidad']
@@ -98,10 +106,20 @@ def checkout(request):
                 orden_detalle.orden = orden
                 orden_detalle.producto = Producto.objects.get(pk=value['producto_id'])
                 orden_detalle.save()
+                body = Body.agg_detalle(orden_detalle, body)
+            body = Body.agg_finalbody(body)
+            send_mail(
+                subject='RECEPCIÓN DE PEDIDO PENDIENTE',
+                message='Hemos recibido su solicitud',
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[orden.cliente.email],
+                html_message=render_to_string(template_name='cliente/pedidos_detalles_email.html', context={'orden': orden, 'detalles':Orden_detalle.objects.filter(orden = orden)})
                 
+                
+                      )    
             carrito.limpiar()    
             messages.success(request,'Hemos recibido tu solicitud.')
-            return redirect('inicio')
+            return redirect('carrito')
         else:
             messages.warning(request, 'Por favor verificar los datos')
 
