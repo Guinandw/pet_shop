@@ -79,9 +79,9 @@
             <li class="nav-item"><a href="{% url 'productos' %}" class="nav-link">Productos</a></li>    
             <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Novedades</a></li>
             <li class="nav-item"><a href="{% url 'contactanos' %}" class="nav-link">Contactanos</a></li>
-            <li class="nav-item cta cta-colored"><a href="{% url 'carrito' %}" class="nav-link"><span class="icon-shopping_cart"></span>[{{cantidad_productos}}]</a></li>
+            <li class="nav-item cta cta-colored"><a href="{% url 'carrito' %}" class="nav-link"><span class="icon-shopping_cart mr-2">[{{cantidad_productos}}]</span></a></li>
             {% if request.user.is_authenticated %}
-            <li class="nav-item cta cta-colored"><a href="{% url 'favoritos' %}" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <li class="nav-item cta cta-colored "><a href="{% url 'favoritos' %}" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill mr-3" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
               </svg></a></li>
             {% endif %}

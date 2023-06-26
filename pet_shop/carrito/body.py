@@ -1,4 +1,4 @@
-import pdfkit as pdf
+#import pdfkit as pdf
 from .models import Orden, Orden_detalle
 from django.utils import dateformat
 

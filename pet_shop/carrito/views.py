@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.http import Http404
+import threading
 
 from .carrito import Carrito
 from . import body as Body
@@ -13,6 +15,7 @@ from carrito.forms import EnviosForms
 
 from django.utils import timezone, dateformat
 from django.conf import settings
+
 
 from . import context_processor
 
@@ -67,7 +70,11 @@ def checkout(request):
     carrito = Carrito(request)
     print(carrito.__dict__)
     
-    perfil = Perfil.objects.get(pk = request.user.id)
+    try:
+        perfil = get_object_or_404(Perfil, pk = request.user.id)
+    except Http404:
+        messages.warning(request, 'SER DEBE COMPLETAR EL PERFIL PARA CONTINUAR.')
+        return redirect('perfil')
     total = context_processor.total_carrito(request)
     orden = Orden()
     titulo = 'Chequeo de Compra'
@@ -108,6 +115,7 @@ def checkout(request):
                 orden_detalle.save()
                 body = Body.agg_detalle(orden_detalle, body)
             body = Body.agg_finalbody(body)
+            
             send_mail(
                 subject='RECEPCIÓN DE PEDIDO PENDIENTE',
                 message='Hemos recibido su solicitud',
